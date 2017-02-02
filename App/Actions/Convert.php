@@ -42,7 +42,7 @@ class Convert {
         if (!empty($data)) {
             $insertData = [
                 'file_name' => $fileName,
-                'file_data' => json_encode($data),
+                'file_datas' => json_encode($data),
                 'type'      => $type,
                 'created'   => date('Y-m-d H:i:s')
             ];
