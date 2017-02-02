@@ -1,0 +1,28 @@
+body { font-size: 16px;}
+
+.cl { clear: both;}
+.fl { float: left;}
+.fr { float: right;}
+
+.fs-18 { font-size: 18px !important;}
+.fs-20 { font-size: 20px !important;}
+
+.container { width: 900px; margin: 0 auto;}
+.info-data { margin-bottom: 20px;}
+.info-data p { margin: 0 0 10px; font-size: 36px;}
+.info-data table { float: left; width: 75%; border: 1px solid #333; border-collapse: 0; border-spacing: 0;}
+.info-data table th { border-left: 1px solid #333;}
+.info-data table th:first-child, .info-data table td:first-child { border-left: 0;}
+.info-data table td { border-top: 1px solid #333; border-left: 1px solid #333; text-align: center;}
+
+.info-data .convert-btn { float: right; padding: 10px 25px; background: #b8cde5; border: 2px solid #ddd; font-size: 34px; transition: background 0.3s; margin: 15px 10px 0 0; outline: none;}
+.info-data .convert-btn:hover { cursor: pointer; background: #b4d4f8;}
+
+.data-wrapper { width: 45%;}
+.data-wrapper table { width: 100%; border-spacing: 0; border-collapse: 0;}
+.data-wrapper table th { text-align: center;}
+.data-wrapper table td { border-color: #333; border-width: 0 1px 1px; border-style: solid; text-align: center;}
+.data-wrapper table td:nth-child(2n) { border-left: 0;}
+.data-wrapper .bg-header { background: #dcdeb9;}
+.data-wrapper .bg-header th { border: 1px solid #333;}
+.data-wrapper .bg-header th:nth-child(2n) { border-left: 0;}
