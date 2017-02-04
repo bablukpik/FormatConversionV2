@@ -2,6 +2,14 @@
 namespace Actions;
 
 use Library\Presentation;
+use Library\DBHelper;
+use Library\Spreadsheet_Excel_Reader;
+use \PHPExcel_Cell;
+use \PHPExcel_Cell_AdvancedValueBinder;
+use \PHPExcel;
+use \PHPExcel_IOFactory;
+
+require_once LIB_PATH . DIRECTORY_SEPARATOR . 'PHPExcel.php';
 
 class App extends Presentation {
 
@@ -163,6 +171,8 @@ class App extends Presentation {
     public function compareData()
     {
         $data = [];
+        $data['mapsData'] = $this->data;
+
         $data['clientMapData'] = Convert::MapData($_SESSION['clientData'], $this->data);
         // Set session
         if ($data['clientMapData']) {
@@ -179,6 +189,95 @@ class App extends Presentation {
 
         return $this->render('compare-data', $data);
     }
+
+    /**
+     * Ajax request compare data
+     */
+    public function exportCompareData()
+    {
+        $mapsData = json_decode($this->data['mapsData'], true);
+
+        $clientMapData = Convert::MapData($_SESSION['clientData'], $mapsData);
+        // Set session
+        if ($clientMapData) {
+            $_SESSION['clientMapData'] = $clientMapData;
+        }
+
+        // Update match count for matchData
+        foreach ($mapsData as $key => $serverWord) {
+            MatchCount::addMatchCount($serverWord);
+        }
+
+        // Get matched data
+        //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
+
+        // Get server data
+        $serverData = $_SESSION['serverData'];
+        $titles = reset($serverData);
+        $newTitles = array();
+
+        foreach($mapsData as $key => $title) {
+            $titleKey = array_keys($titles, $title)[0];
+            $newTitles[$titleKey] = $title;
+        }
+
+        array_splice($serverData, 0, 1, array($newTitles));
+
+        $exportData = array();
+
+        foreach ($clientMapData as $k => $row) {
+            $rowData = array();
+            foreach ($newTitles as $title) {
+                $rowData[$title] = $row[$title];
+            }
+            $exportData[] = $rowData;
+        }
+
+
+        // Set value binder
+        PHPExcel_Cell::setValueBinder( new PHPExcel_Cell_AdvancedValueBinder() );
+
+        // Create new PHPExcel object
+        $objPHPExcel = new PHPExcel();
+
+        // Set document properties
+        $objPHPExcel->getProperties()->setCreator("Anonimous")
+            ->setLastModifiedBy("Anonimous")
+            ->setTitle("Office 2007 XLSX Test Document")
+            ->setSubject("Office 2007 XLSX Test Document")
+            ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("Test result file");
+
+        $activeSheet = $objPHPExcel->setActiveSheetIndex(0);
+        $headers = array_keys(reset($exportData));
+        array_unshift($exportData, $headers);
+
+        $activeSheet->fromArray($exportData, NULL, 'A1');
+
+        $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        $writerName = 'Excel2007';
+        $fullName = "exportCompareData.xlsx";
+
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: '.$contentType);
+        header('Content-Disposition: attachment;filename="'.$fullName.'"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $writerName);
+        $objWriter->save('php://output');
+        exit;
+    }
+
+
 
     public function updateSimilarCounter()
     {

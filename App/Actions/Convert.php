@@ -22,7 +22,7 @@ class Convert {
      */
     public static function GetDataFromFile($file, $name = '', $type = '') {
         // Check file type
-        $data = self::readData($file);
+        $data = self::readData($file, $type == 'client');
 
         // Add data to database, apply for server type only
         if ($type == 'server') {
@@ -149,7 +149,7 @@ class Convert {
      * @return array
      * @throws \PHPExcel_Exception
      */
-    private static function readData($file)
+    private static function readData($file, $highlightedColumnOnly = false)
     {
         $objPhpExcel = \PHPExcel_IOFactory::load($file);
 
@@ -163,21 +163,30 @@ class Convert {
 
         $arrayData = array();
         $maxColumn = 0;
+        $filterColumns = array();
         $i = 0;
         for ($row = 0; $row <= $highestRow;++$row)
         {
+            $rowData = array();
             for ($col = 0; $col <$highestColumnIndex;++$col)
             {
                 $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
                 $value = $cell->getValue();
-                if (!empty($value)) {
-                    $arrayData[$i][$col] = trim($value);
+                if ($highlightedColumnOnly && empty($arrayData)) {
+                    $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
+                    if ($fillColor != "FFFFFFFF" && $fillColor != "FF000000") {
+                        $filterColumns[] = $col;
+                    }
+                }
+                if (!empty($value) && (!$highlightedColumnOnly || in_array($col, $filterColumns))) {
+                    $rowData[$col] = trim($value);
                 }
             }
 
-            $totalColumn = count($arrayData[$i]);
+            $totalColumn = count($rowData);
 
             if ($totalColumn) {
+                $arrayData[$i] = $rowData;
                 $i++;
             }
 

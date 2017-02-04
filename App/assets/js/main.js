@@ -1,8 +1,49 @@
 var mapsData = {}, tmpMapsData = {}, timeOut, lineWeight = 0.5, drawOffsetLeft = 10;
 
+var sync = {
+    "JAN": ["ＪＡＮＣＤ", "JAN", "JANCD"],
+    "商品名": ["商品名", "品名"],
+    "規格": ["規格", "量目"],
+    "メーカー名": ["メーカー名", "ブランド/セグメント"],
+    "発売日": ["発売日", "発売予定"],
+    "賞味期限": ["賞味期限", "賞味期限"],
+    "売価\n（税抜": ["売価\n（税抜）", "税込価格"],
+    "原価\n（税抜）": ["原価\n（税抜）", "原価"],
+    "発注\n単位": ["発注\n単位", "入数"]
+};
+
+
+//Convert JSON Array to CSV
+function jsonToCSV(data, name) {
+    var csvContent = "data:text/csv;charset=utf-8,";
+    $.each(data, function (k, row) {
+        if (k == 0) {
+            $.each(row, function (key) {
+                csvContent += key + ",";
+            });
+        }
+        csvContent += "\n";
+        $.each(row, function (key, value) {
+            csvContent += value + ",";
+        });
+    });
+
+    downloadCSV(csvContent, name);
+}
+
+//Download CSV File
+function downloadCSV(csvContent, name) {
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", name + ".csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "my_data.csv".
+    document.body.removeChild(link);
+}
+
 $(document).ready(function(){
-    // Init canvas
-    initCanvas();
 
     $('.close-support').on('click', function(){
         $(this).closest('.support-div').hide();
@@ -206,7 +247,7 @@ function createMatchLine(leftItem, rightItem, removeOld)
 function drawLine (fromElm, to) {
     connectors.push({from: fromElm, to: to});
 
-    drawAll();
+    //drawAll();
 }
 
 /**
@@ -312,8 +353,114 @@ function compareData() {
     });
 }
 
+/**
+ * Do compare data
+ */
+function exportCompareData() {
+    var form = $('<form>').attr('action', 'index.php?action=exportCompareData').attr('method','post').appendTo('body');
+    $('<textarea>').attr('name','mapsData').html(JSON.stringify(mapsData)).appendTo(form);
+    form[0].submit();
+    form.remove();
+}
+
 // Auto compare, create link
 function autoCompare() {
+    var clientList, serverList, match = false, noMatching = true;
+    console.log(mapsData);
+    console.log(tmpMapsData);
+    // Get client list
+    clientList = $('.client-data-connect a');
+
+    // Server list
+    serverList = $('.server-data-connect a');
+
+    // Auto match data
+    serverList.each(function(){
+        match = false;
+        var $r = $(this);
+        var rowMatched = false;
+        clientList.each(function(){
+            if ( rowMatched ) {
+                
+            } else {
+                var $l = $(this);
+                if ($r.data('key') === $l.data('key')) {
+                    match = true;
+                    // Check map created
+                    if (!mapsData[$l.data('key')] && !tmpMapsData[$r.data('key')]) {
+                        drawLine($l, $r);
+                        mapsData[$l.data('key')] = $r.data('key');
+                        tmpMapsData[$r.data('key')] = $l.data('key');
+                        noMatching = false;
+                        rowMatched = true;
+                    }
+                } else if ( typeof listIndex[$r.data('key')] != 'undefined' ) {
+                    // Get list word similar
+                    var arrSimilar = similarWords[listIndex[$r.data('key')]];
+                    var item = false;
+
+                    $.each(arrSimilar, function(k, v){
+                        if (v != $l.data('key') && v != '') {
+                            // Check key in server list
+                            item = $('.client-data-connect a[data-key="' + v + '"]');
+                            // Find similar word success: create line.
+                            if (item.length > 0) {
+                                // Check map created
+                                if (!mapsData[item.data('key')] && !tmpMapsData[item.data('key')]) {
+                                    drawLine(item, $r);
+                                    mapsData[item.data('key')] = $r.data('key');
+                                    tmpMapsData[$r.data('key')] = item.data('key');
+                                    updateCounterSimilarWord(listIndex[$r.data('key')], v);
+                                    noMatching = false;
+                                    rowMatched = true;
+                                }
+                            }
+                        }
+                    });
+                } else if ( typeof sync[$r.data('key')] != 'undefined' ) {
+                    // Get list word similar
+                    var arrSimilar = sync[$r.data('key')];
+                    var item = false;
+
+                    $.each(arrSimilar, function(k, v){
+                        if (v != $l.data('key') && v != '') {
+                            // Check key in server list
+                            item = $('.client-data-connect a[data-key="' + v + '"]');
+                            // Find similar word success: create line.
+                            if (item.length > 0) {
+                                // Check map created
+                                if (!mapsData[item.data('key')] && !tmpMapsData[item.data('key')]) {
+                                    drawLine(item, $r);
+                                    mapsData[item.data('key')] = $r.data('key');
+                                    tmpMapsData[$r.data('key')] = item.data('key');
+                                    updateCounterSimilarWord(listIndex[$r.data('key')], v);
+                                    noMatching = false;
+                                    rowMatched = true;
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        if (!rowMatched) {
+            $r.closest('tr').remove();
+        }
+
+    });
+
+    if (noMatching) {
+        // Show modal
+        $('.no-matching').show();
+    } else {
+        // Update counter for word match
+        //compareData();
+        initCanvas();
+        drawAll();
+    }
+}
+function autoCompareBackup() {
     var clientList, serverList, match = false, noMatching = true;
 
     // Get client list
@@ -348,7 +495,6 @@ function autoCompare() {
                 // Get list word similar
                 var arrSimilar = similarWords[listIndex[$l.data('key')]];
                 var item = false;
-
                 $.each(arrSimilar, function(k, v){
                     if (v != $l.data('key') && v != '') {
                         // Check key in server list

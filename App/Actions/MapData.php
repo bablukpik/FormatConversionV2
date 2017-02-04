@@ -7,7 +7,7 @@ use Library\DBHelper;
  * Class MapData
  */
 class MapData {
-    public static $tableBasic = 'basic_words';
+    public static $tableBasic = 'basic_word';
     public static $tableSimilar = 'similar_words';
 
     /**

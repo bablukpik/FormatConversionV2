@@ -36,6 +36,7 @@ header { z-index: 100; position: relative; padding: 5px;}
 .data-wrapper .bg-header { background: #dcdeb9;}
 .data-wrapper .bg-header th { border: 1px solid #333;}
 .data-wrapper .bg-header th:nth-child(2n) { border-left: 0;}
+.data-wrapper.w-100.ml-0 table td { text-align: right;}
 
 .data-wrapper table.shortTable td { height: 40px; line-height: 40px;}
 table.row-content.shortTable .head-col { line-height: 40px; height: 41px;}

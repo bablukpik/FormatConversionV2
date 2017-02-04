@@ -98,6 +98,9 @@
                     <?php endforeach; ?>
                 </table>
             </div>
+            <div>
+                <a id="export-to-excel" href="javascript:exportCompareData()">Export to Excel</a>
+            </div>
         <?php endif; ?>
     </div>
     <canvas id="canvas" width=300 height=300 onclick="handleCanvasClick(event)"></canvas>

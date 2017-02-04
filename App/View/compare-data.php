@@ -8,6 +8,19 @@
         <?php
         // Get server data
         $serverData = $_SESSION['serverData'];
+        $titles = reset($serverData);
+        $newTitles = array();
+//        foreach($titles as $key => $title) {
+//            if (!isset($serverMapData[$title])) {
+//                unset($titles[$key]);
+//            }
+//        }
+        foreach($mapsData as $key => $title) {
+            $titleKey = array_keys($titles, $title)[0];
+            $newTitles[$titleKey] = $title;
+        }
+
+        array_splice($serverData, 0, 1, array($newTitles));
         // Get array key
         $keys = $serverData[0];
         ?>
