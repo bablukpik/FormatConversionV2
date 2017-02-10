@@ -13,7 +13,7 @@
         hasData = true;
         $(document).ready(function() {
             initTranslate();
-            sortMatchServer();
+            //sortMatchServer();
             autoCompare();
         });
     </script>

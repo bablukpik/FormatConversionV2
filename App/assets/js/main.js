@@ -12,37 +12,6 @@ var sync = {
     "発注\n単位": ["発注\n単位", "入数"]
 };
 
-
-//Convert JSON Array to CSV
-function jsonToCSV(data, name) {
-    var csvContent = "data:text/csv;charset=utf-8,";
-    $.each(data, function (k, row) {
-        if (k == 0) {
-            $.each(row, function (key) {
-                csvContent += key + ",";
-            });
-        }
-        csvContent += "\n";
-        $.each(row, function (key, value) {
-            csvContent += value + ",";
-        });
-    });
-
-    downloadCSV(csvContent, name);
-}
-
-//Download CSV File
-function downloadCSV(csvContent, name) {
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", name + ".csv");
-    document.body.appendChild(link); // Required for FF
-
-    link.click(); // This will download the data file named "my_data.csv".
-    document.body.removeChild(link);
-}
-
 $(document).ready(function(){
 
     $('.close-support').on('click', function(){
@@ -458,6 +427,7 @@ function autoCompare() {
         //compareData();
         initCanvas();
         drawAll();
+        sortMatchServer();
     }
 }
 function autoCompareBackup() {

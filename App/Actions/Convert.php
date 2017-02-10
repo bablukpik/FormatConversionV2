@@ -143,6 +143,27 @@ class Convert {
         return false;
     }
 
+    private static function mergeData($dataArray1, $dataArray2)
+    {
+        if (empty($dataArray1)) return $dataArray2;
+        if (empty($dataArray2)) return $dataArray1;
+
+        $mergedArray = array();
+        $length = max(count($dataArray1), count($dataArray2));
+        for ($i=0; $i < $length; $i++) {
+            if (!isset($dataArray1[$i])) {
+                $dummyData = array_fill_keys(array_keys($dataArray1[0]), '');
+                $mergedArray[$i] = array_merge($dummyData,$dataArray2[$i]);
+            } elseif (!isset($dataArray2[$i])) {
+                $dummyData = array_fill_keys(array_keys($dataArray2[0]), '');
+                $mergedArray[$i] = array_merge($dataArray1[$i], $dummyData);
+            } else {
+                $mergedArray[$i] = array_merge($dataArray1[$i], $dataArray2[$i]);
+            }
+        }
+        return $mergedArray;
+    }
+
     /**
      * Read file and return array data. (Merge cells processed)
      * @param $file
@@ -161,6 +182,9 @@ class Convert {
 
         $highestColumnIndex = \PHPExcel_Cell::columnIndexFromString($highestColumn);
 
+        $columnKeyAdjustments = 0;
+        $rowKeyAdjustments = 0;
+        $arrayDataMerged = array();
         $arrayData = array();
         $maxColumn = 0;
         $filterColumns = array();
@@ -172,14 +196,21 @@ class Convert {
             {
                 $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
                 $value = $cell->getValue();
-                if ($highlightedColumnOnly && empty($arrayData)) {
+                if ($highlightedColumnOnly) {
                     $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
                     if ($fillColor != "FFFFFFFF" && $fillColor != "FF000000") {
-                        $filterColumns[] = $col;
+                        if (empty($arrayData)) {
+                            $filterColumns[] = $col;
+                        } else {
+                            $arrayDataMerged = self::mergeData($arrayDataMerged, $arrayData);
+                            $arrayData = array();
+                            $columnKeyAdjustments += $highestColumnIndex;
+                            $i = 0; //reset index for array data
+                        }
                     }
                 }
                 if (!empty($value) && (!$highlightedColumnOnly || in_array($col, $filterColumns))) {
-                    $rowData[$col] = trim($value);
+                    $rowData[$col+$columnKeyAdjustments] = trim($value);
                 }
             }
 
@@ -240,6 +271,9 @@ class Convert {
             }
         }
 
+        if (!empty($arrayDataMerged)) {
+            $arrayData = self::mergeData($arrayDataMerged, $arrayData);
+        }
         return $arrayData;
     }
 
