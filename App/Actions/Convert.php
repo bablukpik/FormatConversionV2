@@ -153,12 +153,12 @@ class Convert {
         for ($i=0; $i < $length; $i++) {
             if (!isset($dataArray1[$i])) {
                 $dummyData = array_fill_keys(array_keys($dataArray1[0]), '');
-                $mergedArray[$i] = array_merge($dummyData,$dataArray2[$i]);
+                $mergedArray[$i] = $dummyData + $dataArray2[$i];
             } elseif (!isset($dataArray2[$i])) {
                 $dummyData = array_fill_keys(array_keys($dataArray2[0]), '');
-                $mergedArray[$i] = array_merge($dataArray1[$i], $dummyData);
+                $mergedArray[$i] = $dataArray1[$i] + $dummyData;
             } else {
-                $mergedArray[$i] = array_merge($dataArray1[$i], $dataArray2[$i]);
+                $mergedArray[$i] = $dataArray1[$i] + $dataArray2[$i];
             }
         }
         return $mergedArray;
@@ -199,14 +199,16 @@ class Convert {
                 if ($highlightedColumnOnly) {
                     $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
                     if ($fillColor != "FFFFFFFF" && $fillColor != "FF000000") {
-                        if (empty($arrayData)) {
-                            $filterColumns[] = $col;
-                        } else {
+                        if (!empty($arrayData)) {
                             $arrayDataMerged = self::mergeData($arrayDataMerged, $arrayData);
                             $arrayData = array();
+                            $rowData = array();
+                            $filterColumns = array();
                             $columnKeyAdjustments += $highestColumnIndex;
                             $i = 0; //reset index for array data
                         }
+
+                        $filterColumns[] = $col;
                     }
                 }
                 if (!empty($value) && (!$highlightedColumnOnly || in_array($col, $filterColumns))) {
@@ -270,10 +272,22 @@ class Convert {
                 $arrayData = $tmpArray;
             }
         }
+//        echo "<pre>";
+//        var_dump($arrayData);
+//        echo "</pre><br><br><pre>";
+//        var_dump($arrayDataMerged);
+//        echo "</pre><br><br><pre>";
+
 
         if (!empty($arrayDataMerged)) {
             $arrayData = self::mergeData($arrayDataMerged, $arrayData);
         }
+
+
+//        var_dump($arrayData);
+//        echo "</pre>";
+//        exit;
+
         return $arrayData;
     }
 
