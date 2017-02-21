@@ -8,7 +8,7 @@
 </script>
 
 <div class="content-wrapper container-fluid">
-<?php if ($clientData && $serverData) : ?>
+<?php if (isset($clientData) && $clientData && $serverData) : ?>
     <script type="text/javascript">
         hasData = true;
         $(document).ready(function() {
@@ -91,7 +91,11 @@
                                 </td>
                                 <?php foreach ($serverData as $k => $row) : ?>
                                     <?php $class = ($k == 0) ? 'head-col' : ''; ?>
-                                    <td class="<?php echo $class; ?>" data-value="<?php echo $serverData[$k][$i]; ?>" title="<?php echo $serverData[$k][$i]; ?>"><?php echo $serverData[$k][$i]; ?></td>
+                                    <?php $colValue = isset($serverData[$k][$i]) ? $serverData[$k][$i] : ''; ?>
+                                    <td class="<?php echo $class; ?>"
+                                        data-value="<?php echo $colValue; ?>"
+                                        title="<?php echo $colValue; ?>">
+                                        <?php echo $colValue; ?></td>
                                 <?php endforeach; ?>
                             </tr>
                         <?php endif; ?>

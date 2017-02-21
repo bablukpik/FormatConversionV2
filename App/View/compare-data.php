@@ -41,8 +41,8 @@
                             <?php foreach ($keys as $index => $key): ?>
                                 <tr>
                                     <td><?php echo $key; ?></td>
-                                    <td><?php echo $serverData[$rIndex][$index]; ?></td>
-                                    <td><?php echo $clientMapData[$rIndex][$key]; ?></td>
+                                    <td><?php echo isset($serverData[$rIndex][$index]) ? $serverData[$rIndex][$index] : ''; ?></td>
+                                    <td><?php echo isset($clientMapData[$rIndex][$key]) ? $clientMapData[$rIndex][$key] : ''; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
