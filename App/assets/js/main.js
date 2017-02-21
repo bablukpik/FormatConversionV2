@@ -14,6 +14,8 @@ var mapsData = {}, tmpMapsData = {}, timeOut, lineWeight = 0.5, drawOffsetLeft =
     var sync = {};
 
 $(document).ready(function(){
+    // Init canvas
+    initCanvas();
 
     $('.close-support').on('click', function(){
         $(this).closest('.support-div').hide();
@@ -217,7 +219,7 @@ function createMatchLine(leftItem, rightItem, removeOld)
 function drawLine (fromElm, to) {
     connectors.push({from: fromElm, to: to});
 
-    //drawAll();
+    drawAll();
 }
 
 /**
@@ -426,9 +428,7 @@ function autoCompare() {
     } else {
         // Update counter for word match
         //compareData();
-        initCanvas();
-        drawAll();
-        sortMatchServer();
+        //sortMatchServer();
     }
 }
 function autoCompareBackup() {
