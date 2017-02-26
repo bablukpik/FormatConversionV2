@@ -1,9 +1,9 @@
 <?php
 namespace Config;
 
-class Config {
-    public static $dbHost = 'testdb04.ccf8wvvwgvwp.ap-northeast-1.rds.amazonaws.com';
+class Config { //testdb04.ccf8wvvwgvwp.ap-northeast-1.rds.amazonaws.com
+    public static $dbHost = 'localhost';
     public static $dbName = 'convert-tool';
-    public static $dbUser = 'jacostest';
-    public static $dbPass = 'jacostest';
+    public static $dbUser = 'root';
+    public static $dbPass = '';
 }

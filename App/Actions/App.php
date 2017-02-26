@@ -104,6 +104,10 @@ class App extends Presentation {
         return $this->render('home', $data);
     }
 
+    public function page(){
+        return $this->render('home_page', $data = array());
+    }
+
     /**
      * User login
      * @return string

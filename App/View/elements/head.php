@@ -19,5 +19,23 @@
             similarWords = json_parse('<?php echo json_encode($listSimilar); ?>'),
             listIndex = json_parse('<?php echo json_encode($listIndex); ?>');
     </script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../assets/css/homePage_tableHelper.css">
+
+    <style>
+        .btn-wrapper a {
+            box-sizing: border-box;
+            padding: 5px 20px;
+            font-size: 25px;
+            margin-left: 2px;
+            border: 2px solid #8c8c8c;
+            background: white;
+            color: #000;
+        }
+        .btn-wrapper button:hover {
+            background: #ccc;
+        }
+    </style>
 </head>
 <body>

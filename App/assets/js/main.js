@@ -955,3 +955,7 @@ function showMatchInfo(leftElm, rightElm, clickPosition)
     modal.css('top', (clickPosition.pageY + 10) + 'px');
     modal.css('left', (clickPosition.pageX - (modal.outerWidth() / 2)) + 'px');
 }
+
+/*Bablu*/
+
+/*/Bablu*/
