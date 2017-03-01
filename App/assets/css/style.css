@@ -30,6 +30,7 @@ time, mark, audio, video {
 	padding: 5px;
 	border-radius: 5px;
     font-size: 20px;
+    display: inline-block;
 }
 
 .created_dated {
@@ -50,6 +51,57 @@ time, mark, audio, video {
 
 .display_none{
 	display: none;
+}
+
+.display_block{
+	display: block;
+}
+
+.buyer_file_choice, .seller_file_choice {
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    padding: 5px;
+    border: 1px solid #b5b5b5;
+    background: #f3eeb6;
+    border-radius: 8px;
+    width: 500px;
+    min-height: 150px;
+    z-index: 9999;
+
+}
+
+.buyer_file_choice h4, .seller_file_choice h4{
+	float:left;
+	font-size: 20px;
+    margin-right: 80px;
+    text-align: left;
+}
+.buyer_file_choice .button1, .seller_file_choice .button1{
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px 15px;
+    float: right;
+    margin-right: 70px;
+}
+.buyer_file_choice .button2, .seller_file_choice .button2{
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px 15px;
+    position:absolute;
+    bottom:10px;
+    left:40%;
+}
+
+.selection_maker_item_next {
+    width: 200px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow: hidden;
 }
 
 /* end bablu */
@@ -311,7 +363,7 @@ input::-webkit-inner-spin-button {
 	font-size: 23px;
 }
 
-.overlay{
+.seller_list, .buyer_list{
 	width: 100%;
 	height: 100%;
 	background: rgba(136, 125, 125, 0.2);
@@ -923,7 +975,7 @@ thead td .ic-note{
 	background: #ccc;
 }
 
-.button-create-buyer{
+.button-create-buyer, .button-create-seller{
 	position: absolute;
 	right: 8px;
 	top: 8px;

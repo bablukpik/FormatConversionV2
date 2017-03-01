@@ -105,7 +105,11 @@ class App extends Presentation {
     }
 
     public function page(){
-        return $this->render('home_page', $data = array());
+        Member::checkLogin();
+        $data = array();
+        $data['buyer'] = BuyerAndSellerModel::buyer();
+        $data['seller'] = BuyerAndSellerModel::seller();
+        return $this->render('home_page', $data);
     }
 
     /**
@@ -119,7 +123,7 @@ class App extends Presentation {
             if (isset($this->data['username']) && isset($this->data['password'])) {
                 if (Member::login($this->data['username'], $this->data['password'])) {
                     // Redirect to home page
-                    $this->redirect('index.php?action=home');
+                    $this->redirect('index.php?action=page');
                 } else {
                     // Login false
                 }

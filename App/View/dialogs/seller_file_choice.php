@@ -1,0 +1,13 @@
+<div id="seller_file_choice_dialog" class="buyer_file_choice display_none">
+	<p style="margin:0 auto; max-width: 550px; font-size: 16px; font-weight: bold; padding: 10px; text-align: center; line-height: 30px;">販売先のジャコス標準が表示されています</p>
+	<div id="seller_choiced_file" class="seller_choiced_file">
+		
+	</div>
+	<div class="selection_seller_item_back">
+		<button id="seller_selection_back" class="button1" style=" position: absolute; top: 10px; right: 10px; margin: 0;">戻る</button>
+	</div>
+	<div class="cl"></div>
+	<div class="selection_seller_item_next">
+		<button id="seller_selection_next" class="button2" style="text-align:center;">完了</button>
+	</div>
+</div>

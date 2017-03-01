@@ -19,9 +19,9 @@
             similarWords = json_parse('<?php echo json_encode($listSimilar); ?>'),
             listIndex = json_parse('<?php echo json_encode($listIndex); ?>');
     </script>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="../assets/css/homePage_tableHelper.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/homePage_tableHelper.css">
 
     <style>
         .btn-wrapper a {
