@@ -26,8 +26,8 @@ require_once '../Library/Presentation.php';
 $app = new \Actions\App();
 
 // Get action
-$action = 'home';
-
+//$action = 'home';
+$action = 'page';
 if (isset($_GET['action']) && !empty($_GET['action'])) {
     // Check function exist:
     if (method_exists($app, $_GET['action'])) {

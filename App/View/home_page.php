@@ -5,6 +5,8 @@
 <?php include('dialogs/maker_selected_dialog.php'); ?>
 <?php include('dialogs/buyer_file_choice.php'); ?>
 <?php include('dialogs/seller_file_choice.php'); ?>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/homePage_tableHelper.css">
 
 <div class="wraper">
     <div id="data-print">
@@ -158,9 +160,9 @@
 
                             "<button style='margin-left: 5px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
-                            "$('#input_excel_file_buyer').click()"+">ファイル選択</button>"+
+                            "browserServerFile();"+">ファイル選択</button>"+
 
-                            "<input id='input_excel_file_buyer' data-id='"+buyer_id+"' data-name='"+buyer_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileMaker(this)'>"+
+                            //"<input id='input_excel_file_buyer' data-id='"+buyer_id+"' data-name='"+buyer_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileMaker(this)'>"+
 
                             "<span style='font-size:14px; margin-left: 5px;' id='buyer_file_name'></span>"+
 
@@ -187,6 +189,7 @@
             if (buyer_file) {
                 $("#buyer_file_choice_dialog, #buyer-list").addClass("display_none");
                 $("#seller-list").removeClass("display_none");
+                //browserServerFile();
             }else{
                 alert("メーカーを選んでください");
             }
@@ -215,9 +218,9 @@
 
                                 "<button style='margin-left: 5px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
-                                "$('#input_excel_file_seller').click()"+">ファイル選択</button>"+
+                                "browserClientFile();"+">ファイル選択</button>"+
 
-                                "<input id='input_excel_file_seller' data-id='"+seller_id+"' data-name='"+seller_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileSeller(this)'>"+
+                                //"<input id='input_excel_file_seller' data-id='"+seller_id+"' data-name='"+seller_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileSeller(this)'>"+
 
                                 "<span style='font-size:14px; margin-left: 5px;' id='seller_file_name'></span>"+
 
@@ -242,11 +245,22 @@
         $("#seller_selection_next").on("click", function(){
             if (seller_file) {
                 $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
+                //browserClientFile();
             }else{
                 alert("販売先を選んでください");
             }
         });
 
+        //Restriction of Link match data button
+        /*function matchLinkButton{
+           if(seller_file && buyer_file){
+                startMatching();
+            }else{
+                alert("最初にメーカーと販売者のファイルをアップロードしてください");
+            }
+     
+        }*/
+        
     </script>
     
 </body>
