@@ -246,6 +246,7 @@
             if (seller_file) {
                 $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
                 //browserClientFile();
+                startMatching();
             }else{
                 alert("販売先を選んでください");
             }

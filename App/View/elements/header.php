@@ -3,7 +3,7 @@
         <!-- <?php if (isset($_SESSION['convert_member'])) : ?>
         <strong><?php echo $_SESSION['convert_member']['username'];?></strong>, <a href="index.php?action=logout">ログアウト</a>
         <?php endif;?> -->
-        <button id="home_posting" class="posting">転記</button>
+        <a href="index.php?action=page" id="home_posting" class="posting">転記</a>
     </div>
     <div class="fr btn-wrapper">
         <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a>
