@@ -1,7 +1,7 @@
 <div class="buyer_list" id="buyer-list">
 	<div class="dialog bottom" style="background: white; width: 600px; height: 275px; padding: 0;">
 		<div class="top header-list-buyer">
-			<h3 style="padding: 0 8px;">メーカーを選んでください</h3>
+			<h3 style="padding: 10px 8px;">メーカーを選んでください</h3>
 			<button class="button-create-buyer" onclick="onRegisterBuyer(); hideViewBuyerList()">新規登録</button>
 			
 		</div>

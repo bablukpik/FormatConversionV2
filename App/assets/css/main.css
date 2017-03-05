@@ -34,7 +34,7 @@
 	display: block;
 }
 
-.buyer_file_choice, .seller_file_choice {
+.buyer_file_choice, .seller_file_choice, .after_seller_file_choice, .final_after_seller_file_choice {
     position: absolute;
     right: 60px;
     bottom: 60px;
@@ -48,13 +48,13 @@
 
 }
 
-.buyer_file_choice h4, .seller_file_choice h4{
+.buyer_file_choice h4, .seller_file_choice h4, .after_seller_file_choice h4, .final_after_seller_file_choice h4{
 	float:left;
 	font-size: 20px;
     margin-right: 80px;
     text-align: left;
 }
-.buyer_file_choice .button1, .seller_file_choice .button1{
+.buyer_file_choice .button1, .seller_file_choice .button1, .after_seller_file_choice .button1, .final_after_seller_file_choice .button1{
     border: 1px solid #ccc;
     background: white;
     border-radius: 5px;
@@ -63,7 +63,7 @@
     float: right;
     margin-right: 70px;
 }
-.buyer_file_choice .button2, .seller_file_choice .button2{
+.buyer_file_choice .button2, .seller_file_choice .button2, .after_seller_file_choice .button2, .final_after_seller_file_choice .button2{
     border: 1px solid #ccc;
     background: white;
     border-radius: 5px;

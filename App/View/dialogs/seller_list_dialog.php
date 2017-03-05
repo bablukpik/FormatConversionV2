@@ -1,7 +1,7 @@
 <div class="seller_list display_none" id="seller-list">
 	<div class="dialog bottom" style="background: white; width: 600px; height: 275px; padding: 0;">
 		<div class="top header-list-seller">
-			<h3 style="padding: 0 8px;">販売先を選んでください</h3>
+			<h3 style="padding: 10px 8px;">販売先を選んでください</h3>
 			<button class="button-create-seller" onclick="onRegisterSeller();">新規登録</button>
 			
 		</div>

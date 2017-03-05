@@ -6,7 +6,9 @@
         <a href="index.php?action=page" id="home_posting" class="posting">転記</a>
     </div>
     <div class="fr btn-wrapper">
-        <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a>
+        <a href="index.php?action=page" title="Link match data" class="btn btn-primary">リンク図</a>
+
+        <!-- <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a> -->
 
         <a href="index.php?action=configSimilarWord" title="config match data" class="btn btn-primary">リンク表</a>
 

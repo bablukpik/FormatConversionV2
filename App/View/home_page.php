@@ -5,6 +5,8 @@
 <?php include('dialogs/maker_selected_dialog.php'); ?>
 <?php include('dialogs/buyer_file_choice.php'); ?>
 <?php include('dialogs/seller_file_choice.php'); ?>
+<?php include('dialogs/after_seller_file_choice.php'); ?>
+<?php include('dialogs/final_after_seller_file_choice.php'); ?>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/homePage_tableHelper.css">
 
@@ -181,15 +183,18 @@
         //buyer file choice back
         $("#maker_selection_back").on("click", function(){
             $("#buyer_file_choice_dialog").addClass("display_none");
-            $("#buyer_file_choice_item").remove();
+            //$("#buyer_file_choice_item").remove();
+            $("#buyer-list").removeClass("display_none");
+            $("#buyer-list").addClass("display_block");
+            $("#header-form")[0].reset();
         });
 
         //buyer file choice next
         $("#maker_selection_next").on("click", function(){
             if (buyer_file) {
                 $("#buyer_file_choice_dialog, #buyer-list").addClass("display_none");
+                $("#buyer_file_choice_dialog, #buyer-list").removeClass("display_block");
                 $("#seller-list").removeClass("display_none");
-                //browserServerFile();
             }else{
                 alert("メーカーを選んでください");
             }
@@ -237,31 +242,51 @@
 
         //Seller file choice back
         $("#seller_selection_back").on("click", function(){
-            $("#seller_file_choice_dialog").addClass("display_none");
-            $("#seller_file_choice_item").remove();
+            $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
+            //$("#seller_file_choice_item").remove();
+            $("#buyer_file_choice_dialog, #buyer-list").removeClass("display_none");
+            $("#buyer_file_choice_dialog, #buyer-list").addClass("display_block");
+            $("#header-form")[0].reset();
         });
 
         //Seller file choice next
         $("#seller_selection_next").on("click", function(){
             if (seller_file) {
                 $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
-                //browserClientFile();
-                startMatching();
+                $("#after_seller_file_choice_dialog").removeClass("display_none");
+                //startMatching();
             }else{
                 alert("販売先を選んでください");
             }
         });
 
-        //Restriction of Link match data button
-        /*function matchLinkButton{
-           if(seller_file && buyer_file){
-                startMatching();
-            }else{
-                alert("最初にメーカーと販売者のファイルをアップロードしてください");
-            }
-     
-        }*/
-        
+        //After Seller file choice back
+        $("#after_seller_selection_back").on("click", function(){
+            $("#after_seller_file_choice_dialog").addClass("display_none");
+        });
+
+        //After Seller file choice next
+        $("#after_seller_selection_next").on("click", function(){
+            $("#after_seller_file_choice_dialog").addClass("display_none");
+            $("#final_after_seller_file_choice_dialog").removeClass("display_none");
+            $("#final_after_seller_file_choice_dialog").addClass("display_block");
+            //startMatching();
+        });
+
+        //Final After Seller file choice back
+        $("#final_after_seller_selection_back").on("click", function(){
+            $("#final_after_seller_file_choice_dialog").addClass("display_none");
+            $("#final_after_seller_file_choice_dialog").removeClass("display_block");
+            $("#header-form")[0].reset();
+            $("#buyer-list").removeClass("display_none");
+            $("#buyer-list").addClass("display_block");
+        });
+
+        //Final After Seller file choice next
+        $("#final_after_seller_selection_next").on("click", function(){
+            $("#final_after_seller_file_choice_dialog").addClass("display_none");
+            startMatching();
+        });
     </script>
     
 </body>
