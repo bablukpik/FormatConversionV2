@@ -195,7 +195,7 @@ class App extends Presentation {
         // Get matched data
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
-        return $this->render('compare-data', $data);
+        return $this->render('compared-data-page', $data);
     }
 
     /**
