@@ -18,7 +18,7 @@
             // Get title
             $titles = reset($serverData);
             ?>
-            <div class="data-wrapper w-100 ml-0">
+            <div class="data-wrapper w-100 ml-0" contenteditable="true">
                 <table class="row-content">
                     <thead>
                     <tr class="bg-header">
@@ -31,12 +31,12 @@
                     <?php foreach ($clientMapData as $k => $row) : ?>
                         <tr>
                             <?php foreach ($titles as $title) : ?>
-                                <td contenteditable="true"><?php echo isset($row[$title]) ? $row[$title] : '';?></td>
+                                <td><?php echo isset($row[$title]) ? $row[$title] : '';?></td>
                             <?php endforeach; ?>
                         </tr>
                         <tr>
                             <?php foreach ($titles as $title) : ?>
-                                <td contenteditable="true"></td>
+                                <td></td>
                             <?php endforeach; ?>
                         </tr>
 
