@@ -18,7 +18,7 @@ class App extends Presentation {
      */
     public function home()
     {
-        Member::checkLogin();
+        //Member::checkLogin();
 
         $data = array();
 
@@ -105,7 +105,7 @@ class App extends Presentation {
     }
 
     public function page(){
-        Member::checkLogin();
+        //Member::checkLogin();
         $data = array();
         $data['buyer'] = BuyerAndSellerModel::buyer();
         $data['seller'] = BuyerAndSellerModel::seller();

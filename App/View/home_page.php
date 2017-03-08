@@ -182,11 +182,14 @@
 
         //buyer file choice back
         $("#maker_selection_back").on("click", function(){
+            $("#header-form")[0].reset();
+            buyer_file='';
+            $('#buyer_file_name').text('');
+
             $("#buyer_file_choice_dialog").addClass("display_none");
-            //$("#buyer_file_choice_item").remove();
+            $("#buyer_file_choice_dialog").removeClass("display_block");
             $("#buyer-list").removeClass("display_none");
             $("#buyer-list").addClass("display_block");
-            $("#header-form")[0].reset();
         });
 
         //buyer file choice next
@@ -242,11 +245,16 @@
 
         //Seller file choice back
         $("#seller_selection_back").on("click", function(){
-            $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
-            //$("#seller_file_choice_item").remove();
+            $("#header-form")[0].reset();
+             seller_file = '';
+             buyer_file='';
+            $('#buyer_file_name').text('');
+            $('#seller_file_name').text('');
+            $("#seller_file_choice_dialog").addClass("display_none");
+            $("#seller_file_choice_dialog").removeClass("display_block");
             $("#buyer_file_choice_dialog, #buyer-list").removeClass("display_none");
             $("#buyer_file_choice_dialog, #buyer-list").addClass("display_block");
-            $("#header-form")[0].reset();
+
         });
 
         //Seller file choice next
