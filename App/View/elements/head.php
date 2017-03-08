@@ -16,8 +16,24 @@
     <script type="text/javascript" src="assets/js/main.js?v=<?php echo time();?>"></script>
     <script type="text/javascript">
         var hasData = false,
-            similarWords = json_parse('<?php echo json_encode($listSimilar); ?>'),
-            listIndex = json_parse('<?php echo json_encode($listIndex); ?>');
+            similarWords = json_parse('<?php echo json_encode(isset($listSimilar)?$listSimilar:''); ?>'),
+            listIndex = json_parse('<?php echo json_encode(isset($listIndex)?$listIndex:''); ?>');
     </script>
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .btn-wrapper a {
+            box-sizing: border-box;
+            padding: 5px 20px;
+            font-size: 25px;
+            margin-left: 2px;
+            border: 2px solid #8c8c8c;
+            background: white;
+            color: #000;
+        }
+        .btn-wrapper button:hover {
+            background: #ccc;
+        }
+    </style>
 </head>
 <body>

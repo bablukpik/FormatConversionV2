@@ -308,7 +308,17 @@ function handleRemoveLine() {
  * Do compare data
  */
 function compareData() {
-    $("#fountainG").show();
+
+    var form = $('<form action="index.php?action=compareData" method="post">').appendTo('body');
+    $.each(mapsData, function(key, value) {
+        $('<input name="'+key+'" value="'+value+'">').appendTo(form);
+    });
+    form[0].submit();
+
+    //end
+
+
+    /*$("#fountainG").show();
     $.ajax({
         url: 'index.php?action=compareData',
         type: 'post',
@@ -322,8 +332,10 @@ function compareData() {
 
             $("#fountainG").hide();
         }
-    });
+    });*/
 }
+
+
 
 /**
  * Do compare data
@@ -955,3 +967,10 @@ function showMatchInfo(leftElm, rightElm, clickPosition)
     modal.css('top', (clickPosition.pageY + 10) + 'px');
     modal.css('left', (clickPosition.pageX - (modal.outerWidth() / 2)) + 'px');
 }
+
+/*Bablu*/
+
+
+
+
+/*/Bablu*/

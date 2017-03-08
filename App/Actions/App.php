@@ -18,7 +18,7 @@ class App extends Presentation {
      */
     public function home()
     {
-        Member::checkLogin();
+        //Member::checkLogin();
 
         $data = array();
 
@@ -104,6 +104,14 @@ class App extends Presentation {
         return $this->render('home', $data);
     }
 
+    public function page(){
+        //Member::checkLogin();
+        $data = array();
+        $data['buyer'] = BuyerAndSellerModel::buyer();
+        $data['seller'] = BuyerAndSellerModel::seller();
+        return $this->render('home_page', $data);
+    }
+
     /**
      * User login
      * @return string
@@ -115,7 +123,7 @@ class App extends Presentation {
             if (isset($this->data['username']) && isset($this->data['password'])) {
                 if (Member::login($this->data['username'], $this->data['password'])) {
                     // Redirect to home page
-                    $this->redirect('index.php?action=home');
+                    $this->redirect('index.php?action=page');
                 } else {
                     // Login false
                 }
@@ -187,7 +195,7 @@ class App extends Presentation {
         // Get matched data
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
-        return $this->render('compare-data', $data);
+        return $this->render('compared-data-page', $data);
     }
 
     /**
