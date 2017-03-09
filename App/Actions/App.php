@@ -65,7 +65,7 @@ class App extends Presentation {
             // Process upload file
             // Check csv file
             if (!isset($_FILES['client-data']['tmp_name']) || empty($_FILES['client-data']['tmp_name'])) {
-                $error = $message['MISSING_FILE'];
+                $error = isset($message['MISSING_FILE'])?$message['MISSING_FILE']:'';
             } else {
                 // Read two file and save to session
                 $clientFile = $_FILES['client-data']['tmp_name'];
@@ -181,7 +181,7 @@ class App extends Presentation {
         $data = [];
         $data['mapsData'] = $this->data;
 
-        $data['clientMapData'] = Convert::MapData($_SESSION['clientData'], $this->data);
+        $data['clientMapData'] = Convert::MapData(isset($_SESSION['clientData'])?$_SESSION['clientData']:'', $this->data);
         // Set session
         if ($data['clientMapData']) {
             $_SESSION['clientMapData'] = $data['clientMapData'];

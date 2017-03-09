@@ -3,7 +3,7 @@
 	
 		見積Excelファイルを選択してください。<br>選択後「次へ」ボタンを押して下さい。
 	</p>
-	<div id="buyer_choiced_file" class="buyer_choiced_file">
+	<div id="buyer_file_choiced" class="buyer_choiced_file">
 		
 	</div>
 	<div class="selection_maker_item_back">

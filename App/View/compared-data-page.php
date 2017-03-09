@@ -31,12 +31,12 @@
                     <?php foreach ($clientMapData as $k => $row) : ?>
                         <tr>
                             <?php foreach ($titles as $title) : ?>
-                                <td><?php echo isset($row[$title]) ? $row[$title] : '';?></td>
+                                <td><?php echo isset($row[$title]) ? $row[$title] : '';?><br></td>
                             <?php endforeach; ?>
                         </tr>
                         <tr>
                             <?php foreach ($titles as $title) : ?>
-                                <td></td>
+                                <td><br></td>
                             <?php endforeach; ?>
                         </tr>
 
