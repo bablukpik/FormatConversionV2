@@ -125,7 +125,7 @@ class Convert {
     {
         if (!empty($mapData) && is_array($mapData)) {
             // Rebuild server data and client data by list key - value
-            $keys = $inputData[0];
+            $keys = isset($inputData[0])?$inputData[0]:'';
             $result = array();
             foreach ($inputData as $k => $value) {
                 if ($k > 0) {

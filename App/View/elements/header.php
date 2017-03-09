@@ -3,10 +3,14 @@
         <!-- <?php if (isset($_SESSION['convert_member'])) : ?>
         <strong><?php echo $_SESSION['convert_member']['username'];?></strong>, <a href="index.php?action=logout">ログアウト</a>
         <?php endif;?> -->
-        <a href="index.php?action=page" id="home_posting" class="posting">転記</a>
+        <p class="posting">転記</p>
     </div>
     <div class="fr btn-wrapper">
-        <a href="index.php?action=page" title="Link match data" class="btn btn-primary">リンク図</a>
+
+        <a href="index.php?action=page" id="buyer_posting" title="Maker" class="btn btn-primary">メーカー</a>
+        <a href="index.php?action=page" title="Sales destination" id="seller_posting" class="btn btn-primary">販売先</a>
+
+        <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a>
 
         <!-- <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a> -->
 
@@ -18,7 +22,7 @@
     </div>
     <div class="cl"></div>
     <form id="header-form" method="post" enctype="multipart/form-data" action="index.php?action=home">
-        <input type="file" name="client-data" onchange="readExcelFileSeller(this)" />
-        <input type="file" name="server-data" onchange="readExcelFileMaker(this)" />
+        <input type="file" name="client-data" onchange="readExcelFileClient(this)" />
+        <input type="file" name="server-data" onchange="readExcelFileStadard(this)" />
     </form>
 </header>
