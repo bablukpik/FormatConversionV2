@@ -73,6 +73,7 @@ $("#seller_selection_next").on("click", function(){
         $("#seller_file_choice_dialog, #seller-list").removeClass("display_block");
         $("#standard_file_choice_dialog").addClass("display_block");
         $("#standard_file_choice_dialog").removeClass("display_none");
+        $('#inputReportType').val('seller');
 
     }else{
         alert("メーカーを選んでください");
@@ -85,7 +86,7 @@ function readExcelFileStadard(input){
     $('#standard_file_name').text(standard_file.name);
 }
 
-//Seller file choice back
+//Standard file choice for Seller and Buyer Back
 $("#standard_selection_back").on("click", function(){
     $("#header-form")[0].reset();
     standard_file = '';
@@ -99,7 +100,7 @@ $("#standard_selection_back").on("click", function(){
 
 });
 
-//Seller file choice next
+//Standard file choice for Seller and Buyer next
 $("#standard_selection_next").on("click", function(){
     if (standard_file) {
         $("#standard_file_choice_dialog").addClass("display_none");

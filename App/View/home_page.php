@@ -102,10 +102,10 @@
                     </div>
                     <br>
                 </div>
-                </table>
 
             </div>
         </div>
-    
+    </div>
+</div>
 </body>
 </html>

@@ -88,39 +88,9 @@ $("#maker_selection_next").on("click", function(){
         $("#buyer_file_choice_dialog, #buyer-list").removeClass("display_block");
         $("#standard_file_choice_dialog").addClass("display_block");
         $("#standard_file_choice_dialog").removeClass("display_none");
+        $('#inputReportType').val('maker');
 
     }else{
         alert("メーカーを選んでください");
-    }
-});
-
-var standard_file;
-function readExcelFileStadard(input){
-    standard_file = $(input)[0].files[0];
-    $('#standard_file_name').text(standard_file.name);
-}
-
-//Seller file choice back
-$("#standard_selection_back").on("click", function(){
-    $("#header-form")[0].reset();
-    standard_file = '';
-    client_file='';
-    $('#buyer_file_name').text('');
-    $('#standard_file_name').text('');
-    $("#standard_file_choice_dialog").addClass("display_none");
-    $("#standard_file_choice_dialog").removeClass("display_block");
-    $("#buyer_file_choice_dialog").removeClass("display_none");
-    $("#buyer_file_choice_dialog").addClass("display_none");
-    $("#seller_file_choice_dialog").addClass("display_none");
-
-});
-
-//Seller file choice next
-$("#standard_selection_next").on("click", function(){
-    if (standard_file) {
-        $("#standard_file_choice_dialog").addClass("display_none");
-        startMatching();
-    }else{
-        alert("販売先を選んでください");
     }
 });

@@ -18,11 +18,12 @@
 
         <a href="javascript:compareData()" title="View Result" class="btn btn-primary">転記</a>
 
-        <a href="#" title="" class="btn btn-primary btn-sort-matching">終了</a>
+        <a href="index.php?action=finalCompareData" title="" class="btn btn-primary btn-sort-matching">終了</a>
     </div>
     <div class="cl"></div>
     <form id="header-form" method="post" enctype="multipart/form-data" action="index.php?action=home">
         <input type="file" name="client-data" onchange="readExcelFileClient(this)" />
         <input type="file" name="server-data" onchange="readExcelFileStadard(this)" />
+        <input type="text" id="inputReportType" name="report-type" value="" />
     </form>
 </header>

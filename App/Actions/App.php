@@ -24,6 +24,8 @@ class App extends Presentation {
 
         // Has file upload
         if (isset($_FILES) && !empty($_FILES)) {
+
+            $_SESSION['ReportType'] = $_POST['report-type'];
             // Initial data
             // Get list similar words
             $listBasicWords = MapData::getListBasicWords();
@@ -181,10 +183,16 @@ class App extends Presentation {
         $data = [];
         $data['mapsData'] = $this->data;
 
+
+
+        $reportType = $_SESSION['ReportType'];
+
+        $sessionKeyName = $reportType == 'maker' ? 'clientMakerMapData' : 'clientSellerMapData';
+
         $data['clientMapData'] = Convert::MapData(isset($_SESSION['clientData'])?$_SESSION['clientData']:'', $this->data);
         // Set session
         if ($data['clientMapData']) {
-            $_SESSION['clientMapData'] = $data['clientMapData'];
+            $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
 
         // Update match count for matchData
@@ -196,6 +204,16 @@ class App extends Presentation {
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
         return $this->render('compared-data-page', $data);
+    }
+
+    public function finalCompareData()
+    {
+        $_SESSION['clientMakerMapData'];
+        $_SESSION['clientSellerMapData'];
+
+        $data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
+
+        return $this->render('final-compared-data', $data);
     }
 
     /**
