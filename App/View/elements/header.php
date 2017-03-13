@@ -8,7 +8,7 @@
     <div class="fr btn-wrapper">
 
         <a href="index.php?action=page" id="buyer_posting" title="Maker" class="btn btn-primary">メーカー</a>
-        <a href="index.php?action=page" title="Sales destination" id="seller_posting" class="btn btn-primary">販売先</a>
+        <a href="#" title="Sales destination" id="seller_posting" class="btn btn-primary">販売先</a>
 
         <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a>
 

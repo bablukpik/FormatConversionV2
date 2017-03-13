@@ -9,6 +9,7 @@ $(document).on("click", function(event){
 
 $("#seller_posting").on("click", function(){
     $("#seller-list").removeClass("display_none");
+    $("#buyer-list").addClass("display_none");
 });
 
 //Seller table selection

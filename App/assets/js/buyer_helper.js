@@ -13,6 +13,9 @@ $('#content-goods').scroll(function() {
     lastPos = currPos;
 });
 
+//Default display none
+$("#buyer-list").addClass("display_none");
+
 //Buyer/Manufacture/Maker list
 $(document).on("click", function(event){
     if ($(event.target).parents("#buyer-list").length > 0 || $(event.target).is("#buyer_posting") || $(event.target).is("#maker_selection_back")) {

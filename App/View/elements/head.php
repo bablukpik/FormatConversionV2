@@ -14,6 +14,8 @@
     <script src="bower_components/kuroshiro/dist/browser/kuroshiro.js"></script>
     <script type="text/javascript" src="assets/js/json_parse.js"></script>
     <script type="text/javascript" src="assets/js/main.js?v=<?php echo time();?>"></script>
+
+
     <script type="text/javascript">
         var hasData = false,
             similarWords = json_parse('<?php echo json_encode(isset($listSimilar)?$listSimilar:''); ?>'),
@@ -35,5 +37,6 @@
             background: #ccc;
         }
     </style>
+
 </head>
 <body>
