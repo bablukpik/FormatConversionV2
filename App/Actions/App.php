@@ -213,7 +213,27 @@ class App extends Presentation {
         $_SESSION['clientMakerMapData'];
         $_SESSION['clientSellerMapData'];
 
-        $data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
+        $array1 = $_SESSION['clientMakerMapData'];
+        $array2 = $_SESSION['clientSellerMapData'];
+
+        $array2JanMap = array();
+
+        foreach ($array2 as $key => $value) {
+            $janCode = $value['JAN'];
+            $array2JanMap[$janCode] = $key;
+        }
+
+        foreach($array1 as $key=>$value)
+        {
+            $janCode = $value['JAN'];
+            if (isset($array2JanMap[$janCode])) {
+                $replaceKey = $array2JanMap[$janCode];
+                $array2[$replaceKey] = $value;
+            }
+        }
+
+        $data['clientMapData'] = $array2;
+        //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
         return $this->render('final-compared-data', $data);
     }
