@@ -195,6 +195,25 @@ class App extends Presentation {
             $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
 
+        $clientDataArr = $_SESSION[$sessionKeyName];
+
+
+        if (isset($_POST['janCode'])){
+            $janCode = $_POST['janCode'];
+            $fieldName = $_POST['fieldName'];
+            $cellValue = $_POST['cellValue'];
+            $id = $_POST['id'];
+
+            foreach ($clientDataArr as $key => $value) {
+               if ($key == $id) {
+                   $clientDataArr[$key][$fieldName] = $cellValue;
+                   $_SESSION[$sessionKeyName] = $clientDataArr;
+                   break;
+               }
+            }
+        }
+
+
         // Update match count for matchData
         foreach ($this->data as $key => $serverWord) {
             MatchCount::addMatchCount($serverWord);
@@ -237,6 +256,7 @@ class App extends Presentation {
 
         return $this->render('final-compared-data', $data);
     }
+
 
     /**
      * Ajax request compare data

@@ -17,6 +17,6 @@
 	</div>
 	<div class="cl"></div>
 	<div class="selection_standard_item_next" style="padding: 15px;">
-		<button id="standard_selection_next" class="button2" style="text-align:center;">完了</button>
+		<button id="standard_selection_next" class="button2" style="text-align:center;">次へ</button>
 	</div>
 </div>
