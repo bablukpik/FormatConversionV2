@@ -222,7 +222,6 @@ class App extends Presentation {
         // Get matched data
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
-
         $data['clientMapData'] = $_SESSION[$sessionKeyName];
         return $this->render('compared-data-page', $data);
     }

@@ -80,13 +80,14 @@
     var non_editable =$('.non_editable');
     non_editable.attr('contenteditable','false');
 
-    //Filed value update
-    $('.row-content .cell').on('keyup', function() {
-        var tr = $(this).closest('tr');
+
+    //Table Edit Request Control
+    function editUpdate(cell){
+        var tr = cell.closest('tr');
         var janCode = tr.attr('data-jan-code');
-        var fieldName = $(this).attr('data-field-name');
-        var id = $(this).attr('data-id')
-        var cellValue = $(this).text();
+        var fieldName = cell.attr('data-field-name');
+        var id = cell.attr('data-id')
+        var cellValue = cell.text();
         console.log(cellValue);
 
         $.ajax({
@@ -100,6 +101,17 @@
                 console.log("ERROR: Table data not updated!");
             }
         });
+    }
 
+    //Filed value update
+    $('.row-content .cell').on('keyup', function() {
+        if (typeof dataSavingTimeout != "undefined") {
+            clearTimeout(dataSavingTimeout);
+        }
+        var cell = $(this);
+
+        dataSavingTimeout = setTimeout(function () {
+            editUpdate(cell);
+        }, 1000);
     });
 </script>
