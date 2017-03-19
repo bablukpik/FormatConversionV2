@@ -256,7 +256,6 @@ class App extends Presentation {
         return $this->render('final-compared-data', $data);
     }
 
-
     /**
      * Ajax request compare data
      */
