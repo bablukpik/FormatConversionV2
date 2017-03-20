@@ -45,9 +45,11 @@
                             ;?>
                             <?php if (!empty($clientData[0][$i])) : ?>
                                 <tr>
-                                    <?php foreach ($clientData as $k => $row) : ?>
+                                    <?php foreach ($clientData as $k => $row) :
+                                        $colValue = isset($clientData[$k][$i]) ? $clientData[$k][$i] : '';
+                                        ?>
                                         <?php $class = ($k == 0) ? 'head-col' : ''; ?>
-                                        <td class="<?php echo $class; ?>" data-value="<?php echo str_replace(' ', '', $clientData[$k][$i]); ?>" title="<?php echo $clientData[$k][$i]; ?>"><?php echo $clientData[$k][$i]; ?></td>
+                                        <td class="<?php echo $class; ?>" data-value="<?php echo str_replace(' ', '', $colValue); ?>" title="<?php echo $colValue; ?>"><?php echo $colValue; ?></td>
                                     <?php endforeach; ?>
                                     <td class="connect-item client-data-connect">
                                         <?php echo $dataCount;?>

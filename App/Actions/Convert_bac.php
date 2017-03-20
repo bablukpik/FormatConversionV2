@@ -22,13 +22,14 @@ class Convert {
      */
     public static function GetDataFromFile($file, $name = '', $type = '') {
         // Check file type
-        $data = self::readData($file, $type == 'client');
+        $data = self::readData($file, $type, $type == 'client');
 
         // Add data to database, apply for server type only
         if ($type == 'server') {
             $type = 1;
             self::InsertFileData($name, $type, $data);
         }
+//        var_dump($data);
 
         return $data;
     }
@@ -170,7 +171,7 @@ class Convert {
      * @return array
      * @throws \PHPExcel_Exception
      */
-    private static function readData($file, $highlightedColumnOnly = false)
+    private static function readData($file, $type, $highlightedColumnOnly = true)
     {
         $objPhpExcel = \PHPExcel_IOFactory::load($file);
 
@@ -189,91 +190,137 @@ class Convert {
         $maxColumn = 0;
         $filterColumns = array();
         $i = 0;
-        for ($row = 0; $row <= $highestRow;++$row)
-        {
-            $rowData = array();
-            for ($col = 0; $col <$highestColumnIndex;++$col)
-            {
-                $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
-                $value = $cell->getValue();
-                if ($highlightedColumnOnly) {
-                    $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
-                    if ($fillColor != "FFFFFFFF" && $fillColor != "FF000000") {
-                        if (!empty($arrayData)) {
-                            $arrayDataMerged = self::mergeData($arrayDataMerged, $arrayData);
-                            $arrayData = array();
-                            $rowData = array();
-                            $filterColumns = array();
-                            $columnKeyAdjustments += $highestColumnIndex;
-                            $i = 0; //reset index for array data
-                        }
 
-                        $filterColumns[] = $col;
-                    }
-                }
-                if (!empty($value) && (!$highlightedColumnOnly || in_array($col, $filterColumns))) {
-                    $rowData[$col+$columnKeyAdjustments] = trim($value);
-                }
-            }
-
-            $totalColumn = count($rowData);
-
-            if ($totalColumn) {
-                $arrayData[$i] = $rowData;
-                $i++;
-            }
-
-            if ($totalColumn > $maxColumn) {
-                $maxColumn = $totalColumn;
-            }
-        }
-
-
-        if ($mergeCell) {
-            // Check merge
-            $firstMerge = reset($mergeCell);
-
-            $arr = explode(':', $firstMerge);
-
-            $start = filter_var($arr[0], FILTER_SANITIZE_NUMBER_INT);
-            $end   = filter_var($arr[1], FILTER_SANITIZE_NUMBER_INT);
-            $rowsMerge = $end - $start;
-
-            if ($rowsMerge >= 1) {
-                // Process array data for merge cell
-                $tmpArray = array();
-                $index = 0;
-                $isMerging = false;
-                $i = 1;
-
-                foreach ($arrayData as $columns) {
-                    if (!$isMerging) {
-                        $tmpArray[$index] = $columns;
-                        $isMerging = true;
-                        $index++;
-                    } else  {
-                        if ($i <= $rowsMerge && $isMerging) {
-                            // Merge to prev row, add value to the last
-                            foreach ($columns as $key => $column) {
-                                $tmpArray[$index - $i][$maxColumn + $key] = $column;
-                            }
-                            if ($i == $rowsMerge) {
-                                $i = 1;
-                                $isMerging = false;
-                            } else {
-                                $i++;
+//        Edited by Mehedi -- start
+        $k = 1;
+        $lastColumnPos = array('col' => null, 'row' => null);
+        $doubleCol = false;
+        $oddIndex = false;
+        if ($type == 'client') {
+            if ($highlightedColumnOnly) {
+                for ($col = 0; $col < $highestColumnIndex; $col++) {
+                    for ($row = 0; $row <= $highestRow; $row++) {
+                        $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
+                        if ($cell->getStyle()->getFill()->getEndColor()->getARGB() == 'FFFFFFFF' && $i > 0) {
+                            $value = $cell->getValue();
+                            if (!empty($value) && $cell->getStyle()->getFont()->getColor()->getARGB() != 'FFFFFFFF') {
+                                if ($doubleCol) {
+                                    if ($oddIndex) {
+                                        $arrayData[$k][$i - 2] = trim($cell->getValue());
+                                        $oddIndex = false;
+                                    } else {
+                                        $arrayData[$k][$i - 1] = trim($cell->getValue());
+                                        $k++;
+                                    }
+                                } else {
+                                    $arrayData[$k][$i - 1] = trim($cell->getValue());
+                                    $k++;
+                                }
                             }
                         } else {
-                            $isMerging = false;
-                            $i = 1;
+                            $arrayData[0][$i] = trim($cell->getValue());
+                            if ($lastColumnPos['col'] == $col && $row - $lastColumnPos['row'] == 1) {
+                                $doubleCol = true;
+                                $oddIndex = true;
+                            } else {
+                                $doubleCol = false;
+                                $oddIndex = false;
+                            }
+                            $lastColumnPos['col'] = $col;
+                            $lastColumnPos['row'] = $row;
+                            $i++;
+                            $k = 1;
                         }
                     }
                 }
+            }
+        } else {
+            for ($row = 0; $row <= $highestRow;++$row)
+            {
+                $rowData = array();
+                for ($col = 0; $col <$highestColumnIndex;++$col)
+                {
+                    $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
+                    $value = $cell->getValue();
+                    if ($highlightedColumnOnly) {
+                        $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
+                        if ($fillColor != "FFFFFFFF" && $fillColor != "FF000000") {
+                            if (!empty($arrayData)) {
+                                $arrayDataMerged = self::mergeData($arrayDataMerged, $arrayData);
+                                $arrayData = array();
+                                $rowData = array();
+                                $filterColumns = array();
+                                $columnKeyAdjustments += $highestColumnIndex;
+                                $i = 0; //reset index for array data
+                            }
 
-                $arrayData = $tmpArray;
+                            $filterColumns[] = $col;
+                        }
+                    }
+                    if (!empty($value) && (!$highlightedColumnOnly || in_array($col, $filterColumns))) {
+                        $rowData[$col+$columnKeyAdjustments] = trim($value);
+                    }
+                }
+
+                $totalColumn = count($rowData);
+
+                if ($totalColumn) {
+                    $arrayData[$i] = $rowData;
+                    $i++;
+                }
+
+                if ($totalColumn > $maxColumn) {
+                    $maxColumn = $totalColumn;
+                }
             }
         }
+//        Edited by Mehedi -- end
 
+//
+//        if ($mergeCell) {
+//            // Check merge
+//            $firstMerge = reset($mergeCell);
+//
+//            $arr = explode(':', $firstMerge);
+//
+//            $start = filter_var($arr[0], FILTER_SANITIZE_NUMBER_INT);
+//            $end   = filter_var($arr[1], FILTER_SANITIZE_NUMBER_INT);
+//            $rowsMerge = $end - $start;
+//
+//            if ($rowsMerge >= 1) {
+//                // Process array data for merge cell
+//                $tmpArray = array();
+//                $index = 0;
+//                $isMerging = false;
+//                $i = 1;
+//
+//                foreach ($arrayData as $columns) {
+//                    if (!$isMerging) {
+//                        $tmpArray[$index] = $columns;
+//                        $isMerging = true;
+//                        $index++;
+//                    } else  {
+//                        if ($i <= $rowsMerge && $isMerging) {
+//                            // Merge to prev row, add value to the last
+//                            foreach ($columns as $key => $column) {
+//                                $tmpArray[$index - $i][$maxColumn + $key] = $column;
+//                            }
+//                            if ($i == $rowsMerge) {
+//                                $i = 1;
+//                                $isMerging = false;
+//                            } else {
+//                                $i++;
+//                            }
+//                        } else {
+//                            $isMerging = false;
+//                            $i = 1;
+//                        }
+//                    }
+//                }
+//
+//                $arrayData = $tmpArray;
+//            }
+//        }
 
         if (!empty($arrayDataMerged)) {
             $arrayData = self::mergeData($arrayDataMerged, $arrayData);

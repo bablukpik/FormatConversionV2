@@ -4,8 +4,9 @@
 <?php include('dialogs/seller_list_dialog.php'); ?>
 <?php include('dialogs/maker_selected_dialog.php'); ?>
 <?php include('dialogs/buyer_file_choice.php'); ?>
-<?php include('dialogs/standard_file_choice.php'); ?>
 <?php include('dialogs/seller_file_choice.php'); ?>
+<?php include('dialogs/standard_file_choice.php'); ?>
+
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/homePage_tableHelper.css">
 <script src="assets/js/buyer_helper.js" type="application/javascript"></script>

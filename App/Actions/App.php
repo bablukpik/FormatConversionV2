@@ -241,12 +241,31 @@ class App extends Presentation {
             $array2JanMap[$janCode] = $key;
         }
 
+        $skipEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
+
         foreach($array1 as $key=>$value)
         {
             $janCode = $value['JAN'];
+
             if (isset($array2JanMap[$janCode])) {
                 $replaceKey = $array2JanMap[$janCode];
-                $array2[$replaceKey] = $value;
+
+                $value;
+                $array2[$replaceKey];
+
+                foreach ($array2[$replaceKey] as $fieldName => $fieldValue){
+
+                       if (!in_array($fieldName, $skipEditFields))
+                       {
+                           $array2[$replaceKey][$fieldName] = $fieldValue;
+
+                       }
+
+
+
+                }
+
+
             }
         }
 
