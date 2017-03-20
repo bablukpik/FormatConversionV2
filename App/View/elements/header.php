@@ -17,8 +17,9 @@
         <a href="index.php?action=configSimilarWord" title="config match data" class="btn btn-primary">リンク表</a>
 
         <a href="javascript:compareData()" title="View Result" class="btn btn-primary">転記</a>
+        <a href="index.php?action=finalCompareData" title="View Overwrite Result" class="btn btn-primary">上書き</a>
 
-        <a href="index.php?action=finalCompareData" title="" class="btn btn-primary btn-sort-matching">終了</a>
+        <a href="#" title="" class="btn btn-primary btn-sort-matching">終了</a>
     </div>
     <div class="cl"></div>
     <form id="header-form" method="post" enctype="multipart/form-data" action="index.php?action=home">
