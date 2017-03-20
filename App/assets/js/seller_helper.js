@@ -42,28 +42,21 @@ $(document).on("click", ".item_seller", function(){
 
         //"<input id='input_excel_file_seller' data-id='"+seller_id+"' data-name='"+seller_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileMaker(this)'>"+
 
-        "<span style='font-size:14px; margin-left: 5px;' id='client_file_name'></span>"+
+        "<span style='font-size:14px; margin-left: 5px;' class='client_file_name'></span>"+
 
         "</div>";
 
     $('#seller_file_choiced').html(html);
 });
 
-var client_file;
-function readExcelFileClient(input){
-    client_file = $(input)[0].files[0];
-    $('#client_file_name').text(client_file.name);
-}
-
 
 //seller file choice back
 $("#seller_selection_back").on("click", function(){
     $("#header-form")[0].reset();
     client_file='';
-    $('#seller_file_name').text('');
-
+    $('.client_file_name').text('');
+    $('.standard_file_name').text('');
     $("#seller_file_choice_dialog").addClass("display_none");
-    $("#seller_file_choice_dialog").removeClass("display_block");
     $("#seller-list").removeClass("display_none");
 });
 
@@ -71,9 +64,7 @@ $("#seller_selection_back").on("click", function(){
 $("#seller_selection_next").on("click", function(){
     if (client_file) {
         $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
-        $("#seller_file_choice_dialog, #seller-list").removeClass("display_block");
-        $("#standard_file_choice_dialog").addClass("display_block");
-        $("#standard_file_choice_dialog").removeClass("display_none");
+        $("#standard_file_choice_dialog_forSeller").removeClass("display_none");
         $('#inputReportType').val('seller');
 
     }else{
@@ -81,30 +72,23 @@ $("#seller_selection_next").on("click", function(){
     }
 });
 
-var standard_file;
-function readExcelFileStadard(input){
-    standard_file = $(input)[0].files[0];
-    $('#standard_file_name').text(standard_file.name);
-}
 
-//Standard file choice for Seller and Buyer Back
-$("#standard_selection_back").on("click", function(){
+//Standard file choice for Seller Back
+$("#standard_selection_back_forSeller").on("click", function(){
     $("#header-form")[0].reset();
     standard_file = '';
     client_file='';
-    $('#seller_file_name').text('');
-    $('#standard_file_name').text('');
-    $("#standard_file_choice_dialog").addClass("display_none");
-    $("#standard_file_choice_dialog").removeClass("display_block");
+    $('.client_file_name').text('');
+    $('.standard_file_name').text('');
+    $("#standard_file_choice_dialog_forSeller").addClass("display_none");
     $("#seller_file_choice_dialog").removeClass("display_none");
-    $("#seller_file_choice_dialog").addClass("display_block");
 
 });
 
-//Standard file choice for Seller and Buyer next
-$("#standard_selection_next").on("click", function(){
+//Standard file choice for Seller next
+$("#standard_selection_next_forSeller").on("click", function(){
     if (standard_file) {
-        $("#standard_file_choice_dialog").addClass("display_none");
+        $("#standard_file_choice_dialog_forSeller").addClass("display_none");
         startMatching();
     }else{
         alert("販売先を選んでください");
