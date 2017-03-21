@@ -985,7 +985,8 @@ thead td .ic-note{
 }
 
 .table-row .table-item:not(:first-child){
-	margin-left: -7px;
+	margin-left: -6px;
+	margin-top: 4px;
 }
 
 .table-body .table-row:not(:first-child){
