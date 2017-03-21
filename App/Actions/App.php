@@ -243,31 +243,23 @@ class App extends Presentation {
 
         $skipEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
 
-        foreach($array1 as $key=>$value)
-        {
-            $janCode = $value['JAN'];
+        foreach($array1 as $key=>$replacingRow) {
+            $janCode = $replacingRow['JAN'];
 
             if (isset($array2JanMap[$janCode])) {
                 $replaceKey = $array2JanMap[$janCode];
 
-                $value;
-                $array2[$replaceKey];
-
                 foreach ($array2[$replaceKey] as $fieldName => $fieldValue){
 
-                       if (!in_array($fieldName, $skipEditFields))
-                       {
-                           $array2[$replaceKey][$fieldName] = $fieldValue;
+                       if (!in_array($fieldName, $skipEditFields)) {
+                           $array2[$replaceKey][$fieldName] = $replacingRow[$fieldName];
 
                        }
-
-
-
                 }
-
 
             }
         }
+
 
         $data['clientMapData'] = $array2;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
