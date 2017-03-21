@@ -64,9 +64,9 @@ $("#seller_selection_back").on("click", function(){
 $("#seller_selection_next").on("click", function(){
     if (client_file) {
         $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
-        $("#standard_file_choice_dialog_forSeller").removeClass("display_none");
+        //$("#standard_file_choice_dialog_forSeller").removeClass("display_none");
         $('#inputReportType').val('seller');
-
+        startMatching();
     }else{
         alert("メーカーを選んでください");
     }

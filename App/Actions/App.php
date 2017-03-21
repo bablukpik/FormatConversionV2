@@ -71,11 +71,16 @@ class App extends Presentation {
             } else {
                 // Read two file and save to session
                 $clientFile = $_FILES['client-data']['tmp_name'];
-                $serverFile = $_FILES['server-data']['tmp_name'];
+                //$serverFile = $_FILES['server-data']['tmp_name'];
 
                 $data['clientData'] = Convert::GetDataFromFile($clientFile, $_FILES['client-data']['name'], 'client');
 
-                if (!isset($_FILES['server-data']) || empty($_FILES['server-data']['tmp_name'])) {
+                $lastFile = Convert::getLastFile(1);
+                if ($lastFile) {
+                    $data['serverData'] = json_decode($lastFile['file_datas'], true);
+                }
+
+             /*   if (!isset($_FILES['server-data']) || empty($_FILES['server-data']['tmp_name'])) {
                     // Get server data from database
                     $data['serverData'] = array();
 
@@ -86,7 +91,7 @@ class App extends Presentation {
 
                 } else {
                     $data['serverData'] = Convert::GetDataFromFile($serverFile, $_FILES['server-data']['name'], 'server');
-                }
+                }*/
 
                 if ($data['clientData'] && $data['serverData']) {
                     // Set data

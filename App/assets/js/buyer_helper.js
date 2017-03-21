@@ -87,9 +87,9 @@ $("#maker_selection_back").on("click", function(){
 $("#maker_selection_next").on("click", function(){
     if (client_file) {
         $("#buyer_file_choice_dialog, #buyer-list").addClass("display_none");
-        $("#standard_file_choice_dialog_forBuyer").removeClass("display_none");
+        //$("#standard_file_choice_dialog_forBuyer").removeClass("display_none");
         $('#inputReportType').val('maker');
-
+        startMatching();
     }else{
         alert("メーカーを選んでください");
     }
@@ -118,8 +118,8 @@ $("#standard_selection_back_forBuyer").on("click", function(){
 $("#standard_selection_next_forBuyer").on("click", function(){
     if (standard_file) {
         $("#standard_file_choice_dialog_forBuyer").addClass("display_none");
-        startMatching();
+        //startMatching();
     }else{
-        alert("s");
+        alert("販売先を選んでください");
     }
 });
