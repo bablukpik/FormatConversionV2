@@ -83,6 +83,12 @@ $("#maker_selection_back").on("click", function(){
     $("#buyer-list").removeClass("display_none");
 });
 
+//Data Formation by company type
+$('.itoham').click(function () {
+    $('#inputCompanyType').val('Itoham');
+    console.log('itoham');
+});
+
 //buyer file choice next
 $("#maker_selection_next").on("click", function(){
     if (client_file) {

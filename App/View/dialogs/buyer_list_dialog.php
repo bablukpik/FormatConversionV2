@@ -12,7 +12,7 @@
 						foreach ($buyer as $each_buyer) {
 							echo "	<tr style='margin-bottom: -1px'>
 										<td style='width: 50%; border: 1px solid #ccc; padding: 5px;'>
-											<button style='width: 68%; border: none; padding: 0 0 0 5px; margin: 0; height: 100%;' class='item-buyer' data-id='".$each_buyer['id']."' data-name='".$each_buyer['name']."' >".$each_buyer['name']."</button>
+											<button style='width: 68%; border: none; padding: 0 0 0 5px; margin: 0; height: 100%;' class='item-buyer ".($each_buyer['name']=='伊藤ハム株式会社'?'itoham':'')."' data-id='".$each_buyer['id']."' data-name='".$each_buyer['name']."' >".$each_buyer['name']."</button>
 											
 											<button class='action-buyer'>編集</button>
 											<button class='action-buyer'>削除</button>

@@ -26,6 +26,8 @@ class App extends Presentation {
         if (isset($_FILES) && !empty($_FILES)) {
 
             $_SESSION['ReportType'] = $_POST['report-type'];
+            $companyType = $_POST['company-type'];
+
             // Initial data
             // Get list similar words
             $listBasicWords = MapData::getListBasicWords();
@@ -73,7 +75,7 @@ class App extends Presentation {
                 $clientFile = $_FILES['client-data']['tmp_name'];
                 //$serverFile = $_FILES['server-data']['tmp_name'];
 
-                $data['clientData'] = Convert::GetDataFromFile($clientFile, $_FILES['client-data']['name'], 'client');
+                $data['clientData'] = Convert::GetDataFromFile($clientFile, $_FILES['client-data']['name'], 'client', $companyType);
 
                 $lastFile = Convert::getLastFile(1);
                 if ($lastFile) {

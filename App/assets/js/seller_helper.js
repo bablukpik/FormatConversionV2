@@ -85,6 +85,12 @@ $("#standard_selection_back_forSeller").on("click", function(){
 
 });
 
+//Data Formation by company type
+$('.donQuixote').click(function () {
+    $('#inputCompanyType').val('Don Quixote');
+    console.log("Donki");
+});
+
 //Standard file choice for Seller next
 $("#standard_selection_next_forSeller").on("click", function(){
     if (standard_file) {
