@@ -131,7 +131,7 @@ class Convert {
                 if ($k > 0) {
                     foreach ($keys as $index => $key) {
                         if (isset($mapData[$key]) && !empty($mapData[$key])){
-                            $result[$k][$mapData[$key]] = $value[$index];
+                            $result[$k][$mapData[$key]] = isset($value[$index])? $value[$index]:'';
                         }
                     }
                 }
