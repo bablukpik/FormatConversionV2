@@ -185,16 +185,24 @@ class Convert {
         $i = 0;
         $k = 1;
         $lastColumnPos = ['col' => null, 'row' => null];
+        $noHeader = true;
+        $topHeaderRow = PHP_INT_MAX;
         if ($company == "Don Quixote") {
             $janFound = false;
             $janPrefix = null;
-
             for ($col = 0; $col < $highestColumnIndex; $col++) {
                 for ($row = 0; $row <= $highestRow; $row++) {
                     $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
-                    if ($cell->getStyle()->getFill()->getEndColor()->getARGB() == 'FFFFFFFF') {
-                        if ($i <= 0)
+                    $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
+                    if ($fillColor == 'FFFFFFFF' || $fillColor == 'FF000000') {
+                        if ($cell->getRow() < $topHeaderRow)
                             continue;
+                        if ($noHeader)
+                            continue;
+                        if ($cell->getRow() == $topHeaderRow) {
+                            $noHeader = true;
+                            continue;
+                        }
                         $value = $cell->getFormattedValue();
                         if ($janFound)
                             $value = $janPrefix . $value;
@@ -225,7 +233,10 @@ class Convert {
                             }
                             $i--;
                         }
-
+                        if ($noHeader)
+                            $noHeader = false;
+                        if ($cell->getRow() < $topHeaderRow)
+                            $topHeaderRow = $cell->getRow();
                         $arrayData[0][$i] = $value;
                         $lastColumnPos['col'] = $col;
                         $lastColumnPos['row'] = $row;
@@ -238,12 +249,18 @@ class Convert {
         } else if ($company == "Itoham") {
             $doubleCol = false;
             $oddIndex = false;
-            $topHeaderRow = -1;
             for ($col = 0; $col < $highestColumnIndex; $col++) {
                 for ($row = 0; $row <= $highestRow; $row++) {
                     $cell = $objWorksheet->getCellByColumnAndRow($col, $row);
-                    if ($cell->getStyle()->getFill()->getEndColor()->getARGB() == 'FFFFFFFF') {
-                        if ($i <= 0 || $cell->getRow() < $topHeaderRow)
+                    $fillColor = $cell->getStyle()->getFill()->getStartColor()->getARGB();
+                    if ($fillColor == 'FFFFFFFF' || $fillColor == 'FF000000') {
+                        if ($noHeader)
+                            continue;
+                        if ($cell->getRow() == $topHeaderRow) {
+                            $noHeader = true;
+                            continue;
+                        }
+                        if ($cell->getRow() < $topHeaderRow)
                             continue;
                         $value = $cell->getFormattedValue();
                         if ($cell->getStyle()->getFont()->getColor()->getARGB() != 'FFFFFFFF') {
@@ -274,7 +291,7 @@ class Convert {
                         if ($cell->isInMergeRange() && !$cell->isMergeRangeValueCell())
                             continue;
                         $arrayData[0][$i] = trim($cell->getFormattedValue());
-                        if ($cell->getRow() > $topHeaderRow)
+                        if ($cell->getRow() < $topHeaderRow)
                             $topHeaderRow = $cell->getRow();
                         if ($lastColumnPos['col'] == $col && $row - $lastColumnPos['row'] == 1) {
                             $doubleCol = true;
@@ -283,6 +300,8 @@ class Convert {
                             $doubleCol = false;
                             $oddIndex = false;
                         }
+                        if ($noHeader)
+                            $noHeader = false;
                         $lastColumnPos['col'] = $col;
                         $lastColumnPos['row'] = $row;
                         $i++;
@@ -291,6 +310,12 @@ class Convert {
                 }
             }
         }
+
+        foreach ($arrayData as $key => $value) {
+            if (empty(trim(implode("", $value))))
+                unset($arrayData[$key]);
+        }
+
         return $arrayData;
     }
 
