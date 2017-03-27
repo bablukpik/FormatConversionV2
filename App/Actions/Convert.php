@@ -264,15 +264,7 @@ class Convert {
                             continue;
                         $value = $cell->getFormattedValue();
                         if ($cell->getStyle()->getFont()->getColor()->getARGB() != 'FFFFFFFF') {
-                            if ($cell->isInMergeRange()) {
-                                if ($cell->isMergeRangeValueCell()) {
-                                    $temp = explode(":", preg_replace("/[^0-9:.]/", "", $cell->getMergeRange()));
-                                    for ($j = 0; $j < $temp[1] - $temp[0] + 1; $j++) {
-                                        $arrayData[$k][$i - 1] = trim($value);
-                                        $k++;
-                                    }
-                                }
-                            } else if (!empty($value)) {
+                            if (!empty($value)) {
                                 if ($doubleCol) {
                                     if ($oddIndex) {
                                         $arrayData[$k][$i - 2] = trim($value);
