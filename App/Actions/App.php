@@ -190,8 +190,6 @@ class App extends Presentation {
         $data = [];
         $data['mapsData'] = $this->data;
 
-
-
         $reportType = $_SESSION['ReportType'];
 
         $sessionKeyName = $reportType == 'maker' ? 'clientMakerMapData' : 'clientSellerMapData';
@@ -204,7 +202,7 @@ class App extends Presentation {
 
         $clientDataArr = $_SESSION[$sessionKeyName];
 
-
+        //Table edited data for Buyer and Seller
         if (isset($_POST['janCode'])){
             $janCode = $_POST['janCode'];
             $fieldName = $_POST['fieldName'];
@@ -222,10 +220,11 @@ class App extends Presentation {
 
 
         // Update match count for matchData
-        foreach ($this->data as $key => $serverWord) {
+/*        foreach ($this->data as $key => $serverWord) {
             MatchCount::addMatchCount($serverWord);
         }
 
+ */
         // Get matched data
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
@@ -241,34 +240,29 @@ class App extends Presentation {
         $array1 = $_SESSION['clientMakerMapData'];
         $array2 = $_SESSION['clientSellerMapData'];
 
-        $array2JanMap = array();
+        $editFields = array('JAN', '商品名', '規格', '発注 単位', '原価 （税抜）', '売価 （税抜）', 'メーカー名', '発売日', '賞味期限');
+        $nonEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
 
-        foreach ($array2 as $key => $value) {
-            $janCode = $value['JAN'];
-            $array2JanMap[$janCode] = $key;
-        }
+        $rowCount = max(count($array1), count($array2));
+        $array3 = array();
 
-        $skipEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
+        for ($key=1; $key<=$rowCount; $key++) {
+            $aData = isset($array1[$key]) ? $array1[$key] : array();
+            $bData = isset($array2[$key]) ? $array2[$key] : array();
+            $cData = array();
 
-        foreach($array1 as $key=>$replacingRow) {
-            $janCode = $replacingRow['JAN'];
-
-            if (isset($array2JanMap[$janCode])) {
-                $replaceKey = $array2JanMap[$janCode];
-
-                foreach ($array2[$replaceKey] as $fieldName => $fieldValue){
-
-                       if (!in_array($fieldName, $skipEditFields)) {
-                           $array2[$replaceKey][$fieldName] = $replacingRow[$fieldName];
-
-                       }
-                }
-
+            foreach($editFields as $fieldName) {
+                $cData[$fieldName] = !empty($aData[$fieldName]) ? $aData[$fieldName] : '';
             }
+
+            foreach($nonEditFields as $fieldName) {
+                $cData[$fieldName] = !empty($bData[$fieldName]) ? $bData[$fieldName] : '';
+            }
+
+            $array3[] = $cData;
         }
-
-
-        $data['clientMapData'] = $array2;
+        
+        $data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
         return $this->render('final-compared-data', $data);
