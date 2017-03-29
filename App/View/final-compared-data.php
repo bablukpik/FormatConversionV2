@@ -30,38 +30,73 @@
                 // Get title
                 $titles = reset($serverData);
                 ?>
-                <div class="data-wrapper w-100 ml-0" contenteditable="true">
+                <div class="data-wrapper w-100 ml-0">
                     <table class="row-content">
                         <thead>
                         <tr class="bg-header">
-                            <?php foreach ($titles as $title) : ?>
-                                <th class="<?php echo $title == '賞味期限'?'border_separator':''?><?php echo $title == '包装形態'?'border_separator2':''?><?php echo $title == '包装形態' || $title == '保存温度' || $title == '税込価格' || $title == '縦' || $title == '横' || $title == '奥行' || $title == '発売予定' || $title == '新・リ'?' non_editable':''?>"><?php echo $title; ?></th>
-                            <?php endforeach; ?>
+                            <th rowspan="2">ブランド/セグメント</th>
+                            <th rowspan="2">新・リ</th>
+                            <th rowspan="2">品名</th>
+                            <th rowspan="2">量目</th>
+                            <th rowspan="2">入数</th>
+                            <th rowspan="2">ＪＡＮＣＤ<br>＜4901231＞</th>
+                            <th rowspan="2">包装形態</th>
+                            <th rowspan="2">賞味<br>期間</th>
+                            <th rowspan="2">保存<br>温度</th>
+                            <th colspan="4">税別</th>
+                            <th rowspan="2">税込価格</th>
+                            <th colspan="3">商品サイズ（ｍｍ）</th>
+                            <th rowspan="2">発売予定</th>
+                            <th rowspan="2">発売の狙い・コンセプト</th>
+                        </tr>
+                        <tr class="bg-header">
+                            <th>卸</th>
+                            <th>本体価格案</th>
+                            <th>値入％</th>
+                            <th>希望小売価格</th>
+
+                            <th>縦</th>
+                            <th>横</th>
+                            <th>奥行</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($clientMapData as $k => $row) : ?>
-                            <tr>
-                                <?php foreach ($titles as $title) : ?>
-                                    <td class="<?php echo $title == '賞味期限'?'border_separator':''?><?php echo $title == '包装形態'?'border_separator2':''?><?php echo $title == '包装形態' || $title == '保存温度' || $title == '税込価格' || $title == '縦' || $title == '横' || $title == '奥行' || $title == '発売予定' || $title == '新・リ'?' non_editable':''?>">
-                                        <?php
-                                        if($title == 'NO') {
-                                            echo '今回';
-                                        } else {
-                                            echo (isset($row[$title]) ? $row[$title] : '');
-                                        }
 
-                                        ?>
-                                        <br></td>
-                                <?php endforeach; ?>
-                            </tr>
-                            <tr>
-                                <?php foreach ($titles as $title) : ?>
-                                    <td class="<?php echo $title == '賞味期限'?'border_separator':''?><?php echo $title == '包装形態'?'border_separator2':''?><?php echo $title == '包装形態' || $title == '保存温度' || $title == '税込価格' || $title == '縦' || $title == '横' || $title == '奥行' || $title == '発売予定' || $title == '新・リ'?' non_editable':''?>"><?php if($title == 'NO') echo '前回';?><br></td>
-                                <?php endforeach; ?>
-                            </tr>
+                            <?php foreach ($clientMapData as $k => $row) : ?>
 
-                        <?php endforeach; ?>
+                                <tr>
+                                    <td rowspan="4">伊都ハム</td>
+                                    <?php foreach ($titles as $title) :  ?>
+                                        <td><div contenteditable="true" class="cell"><?php
+
+                                           echo (isset($row[$title]) ? $row[$title] : '');
+
+                                        ?></div></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <tr>
+                                    <?php foreach ($titles as $title) : ?>
+                                        <td><div contenteditable="true" class="cell"><?php
+                                                echo '<br>';
+                                            ?></div></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <tr>
+                                    <?php foreach ($titles as $title) : ?>
+                                        <td><div contenteditable="true" class="cell"><?php
+                                                echo '<br>';
+                                            ?></div></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <tr>
+                                    <?php foreach ($titles as $title) : ?>
+                                        <td><div contenteditable="true" class="cell"><?php
+                                                echo '<br>';
+                                            ?></div></td>
+                                    <?php endforeach; ?>
+                                </tr>
+
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -74,5 +109,4 @@
     $('<td style="padding: 1px;">').insertAfter('.border_separator');
     var non_editable =$('.non_editable');
     non_editable.attr('contenteditable',false);
-    non_editable.attr('disabled');
 </script>

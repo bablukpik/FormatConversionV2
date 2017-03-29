@@ -240,7 +240,7 @@ class App extends Presentation {
         $array1 = $_SESSION['clientMakerMapData'];
         $array2 = $_SESSION['clientSellerMapData'];
 
-        $editFields = array('JAN', '商品名', '規格', '発注 単位', '原価 （税抜）', '売価 （税抜）', 'メーカー名', '発売日', '賞味期限');
+/*        $editFields = array('JAN', '商品名', '規格', '発注 単位', '原価 （税抜）', '売価 （税抜）', 'メーカー名', '発売日', '賞味期限');
         $nonEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
 
         $rowCount = max(count($array1), count($array2));
@@ -260,9 +260,14 @@ class App extends Presentation {
             }
 
             $array3[] = $cData;
-        }
-        
-        $data['clientMapData'] = $array3;
+        }*/
+
+        $donkiTitle = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
+
+
+        $data['clientMapData'] = $array1;
+        $data['donkiTitle'] = $donkiTitle;
+        //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
         return $this->render('final-compared-data', $data);
