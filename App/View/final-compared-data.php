@@ -62,16 +62,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        発注
-                        単位
                             <?php foreach ($clientMapData as $k => $row) : ?>
 
                                 <tr>
                                     <td rowspan="4">伊都ハム</td>
                                     <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
+                                                if ($title=='JAN'){
+                                                   echo substr($row[$title], 7);
+                                                }else{
+                                                    echo isset($row[$title]) ? $row[$title]:'';
+                                                }
 
-                                               echo isset($row[$title])? $row[$title]:'';
 
                                         ?></div></td>
                                     <?php endforeach; ?>
