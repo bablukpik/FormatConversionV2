@@ -29,6 +29,7 @@
                 <?php
                 // Get title
                 $titles = reset($serverData);
+                //var_dump($titles);
                 ?>
                 <div class="data-wrapper w-100 ml-0">
                     <table class="row-content">
@@ -61,15 +62,16 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                        発注
+                        単位
                             <?php foreach ($clientMapData as $k => $row) : ?>
 
                                 <tr>
                                     <td rowspan="4">伊都ハム</td>
-                                    <?php foreach ($titles as $title) :  ?>
+                                    <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
 
-                                           echo (isset($row[$title]) ? $row[$title] : '');
+                                               echo isset($row[$title])? $row[$title]:'';
 
                                         ?></div></td>
                                     <?php endforeach; ?>

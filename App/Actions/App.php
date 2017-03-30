@@ -96,6 +96,13 @@ class App extends Presentation {
                 }*/
 
                 if ($data['clientData'] && $data['serverData']) {
+
+                    $titles = array_shift($data['serverData']);
+                    foreach ($titles as $key => $title) {
+                        $titles[$key] = preg_replace("/\s/", '', $title);
+                    }
+                    array_unshift($data['serverData'], $titles);
+
                     // Set data
                     $_SESSION['serverData'] = $data['serverData'];
                     $_SESSION['clientData'] = $data['clientData'];
@@ -262,11 +269,11 @@ class App extends Presentation {
             $array3[] = $cData;
         }*/
 
-        $donkiTitle = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
-
+        //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
+        $standardAccordingToTdonki = array('新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格14', '縦', '横16', '奥行17', '発売予定', '発売の狙い・コンセプト');
 
         $data['clientMapData'] = $array1;
-        $data['donkiTitle'] = $donkiTitle;
+        $data['donkiTitle'] = $standardAccordingToTdonki;
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
