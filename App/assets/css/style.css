@@ -196,47 +196,6 @@ input::-webkit-inner-spin-button {
 	font-size: 16px;
 }
 
-
-.scroll-up{
-	height: 35px;
-	width: 50px;
-	margin-top: 7px;
-	background: url(../img/ic_scroll_to_top.png);
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: none;
-}
-
-.scroll-up:hover{
-	height: 35px;
-	width: 50px;
-	margin-top: 7px;
-	background: url(../img/ic_scroll_to_top_press.png);
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: none;
-}
-
-.scroll-down{
-	height: 35px;
-	width: 50px;
-	margin-top: 7px;
-	background: url(../img/ic_scroll_to_bottom.png);
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: none;
-}
-
-.scroll-down:hover{
-	height: 35px;
-	width: 50px;
-	margin-top: 7px;
-	background: url(../img/ic_scroll_to_bottom_press.png);
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: none;
-}
-
 .body{
 	margin-top: 100px;
 	height: 490px;
@@ -278,6 +237,13 @@ input::-webkit-inner-spin-button {
 	width: 65%;
 	height: 60px;
 	font-size: 23px;
+}
+
+.item-buyer:focus {
+	outline: none;
+	outline-color: transparent;
+	outline-style: none;
+	outline-width: 0px;
 }
 
 .seller_list, .buyer_list{
@@ -892,6 +858,14 @@ thead td .ic-note{
 	background: #ccc;
 }
 
+.header-list-buyer{
+	margin-bottom: 30px;
+}
+
+a{
+	text-decoration:none;
+}
+
 .button-create-buyer, .button-create-seller{
 	position: absolute;
 	right: 8px;
@@ -900,11 +874,11 @@ thead td .ic-note{
 	border: 1px solid #ccc;
 	padding: 3px 15px;
 	font-size: 20px;
+	display: block;
+	text-decoration: none;
 }
-
-
-.button-create-buyer:hover, .item-buyer:hover, .choice-excel-buyer:hover{
-	background: #B6B6B6;
+.button-create-buyer:hover{
+	text-decoration: none;
 }
 
 .item-buyer{

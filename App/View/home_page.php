@@ -10,8 +10,7 @@
 
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/homePage_tableHelper.css">
-<script src="assets/js/buyer_helper.js" type="application/javascript"></script>
-<script src="assets/js/seller_helper.js" type="application/javascript"></script>
+
 
 <div class="wraper">
     <div id="data-print">

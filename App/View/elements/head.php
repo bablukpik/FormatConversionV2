@@ -21,7 +21,10 @@
             similarWords = json_parse('<?php echo json_encode(isset($listSimilar)?$listSimilar:''); ?>'),
             listIndex = json_parse('<?php echo json_encode(isset($listIndex)?$listIndex:''); ?>');
     </script>
+
     <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <script src="assets/js/buyer_helper.js" type="application/javascript"></script>
+    <script src="assets/js/seller_helper.js" type="application/javascript"></script>
 
     <style>
         .btn-wrapper a {
