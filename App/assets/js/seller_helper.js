@@ -1,26 +1,21 @@
 jQuery(function ($) {
-    //Buyer List Back
+    //Seller List Back
     $(document).on("click", '#sellerListBack', function(event){
-        $("#buyer-list").addClass("display_none");
+        //$("#seller-list").addClass("display_none");
+        window.location = ('index.php?action=page&select=manufacturer');
     });
+
+    //Seller List Hide
+    var select = getURLParam('select');
+    //console.log(select);
+    if ( select == 'manufacturer' ) {
+        $("#seller-list").addClass("display_none");
+    }
 
     //Seller list
     $(document).on("click", function(event){
         if (!($(event.target).parents("#seller-list").length > 0 || $(event.target).is("#seller_selection_back"))) {
             $("#seller-list").addClass("display_none");
-        }
-    });
-
-//Seller List display
-    $("#seller_posting").on("click", function(e){
-        console.log("Clicked");
-        if (sessionStorage.getItem("sellerPopup")) {
-            sessionStorage.removeItem("sellerPopup");
-            $("#seller-list").removeClass("display_none");
-            $("#buyer-list").addClass("display_none");
-        }else{
-            e.preventDefault();
-            alert("まずはメーカーファイルを選んでください。");
         }
     });
 
@@ -78,8 +73,10 @@ jQuery(function ($) {
         if (client_file) {
             $("#seller_file_choice_dialog, #seller-list").addClass("display_none");
             //$("#standard_file_choice_dialog_forSeller").removeClass("display_none");
+            //$("#after_seller_file_choice_dialog").removeClass("display_none");
             $('#inputReportType').val('seller');
-            startMatching();
+            sessionStorage.setItem("sellerPopup",'true');
+            startMatching(); /////////////////////////////////old
         }else{
             alert("メーカーを選んでください");
         }
@@ -108,9 +105,60 @@ jQuery(function ($) {
     $("#standard_selection_next_forSeller").on("click", function(){
         if (standard_file) {
             $("#standard_file_choice_dialog_forSeller").addClass("display_none");
-            //startMatching();
         }else{
             alert("販売先を選んでください");
         }
     });
-});
+
+//Seller List will display after clicking the onlyFinishButton
+    $("#onlyFinishButton").on("click", function(){
+        console.log("Clicked");
+        window.location = 'index.php?action=page&select=seller';
+/*        $("#seller-list").removeClass("display_none");
+        $("#buyer-list").addClass("display_none");*/
+    });
+
+    /// Go to Seller report page from overwriting page by clicking yesButton
+    $("#yesDialogButton").on("click", function(){
+        window.location = 'index.php?action=compareData';
+    });
+
+}); //End Main jQuery Block
+
+
+/// Seller report showing according to URL parameter
+jQuery(function($) {
+    var action = getURLParam('action');
+    console.log(action);
+    if ( action == 'compareData' && sessionStorage.getItem('sellerPopup')!='true') {
+        console.log('true');
+        $("#onlyFinishDialog").removeClass("display_none");
+    }else if ( action == 'compareData' && sessionStorage.getItem('sellerPopup')=='true') {
+        console.log('false');
+        $("#onlyFinishDialog").addClass("display_none");
+        $("#onlyOverwrittingDialog").removeClass("display_none");
+    }
+
+    /// Finish overwriting page by clicking noButton and display a guide
+    $("#noDialogButton").on("click", function(){
+        console.log('Clicked');
+        $("#onlyFinishDialogUpperR").removeClass("display_none");
+        $("#yesOrNoDialog").addClass("display_none");
+    });
+
+    //Upper Right Button for hompage confirmation
+    $("#onlyFinishButtonUpperR").on("click", function(){
+        $("#onlyFinishDialogUpperR").addClass("display_none");
+    });
+
+}); //End jQuery Block
+
+/// Seller report showing according to URL parameter
+jQuery(function($) {
+    var action = getURLParam('action');
+    console.log(action);
+    if ( action == 'finalCompareData' ) {
+        $("#yesOrNoDialog").removeClass("display_none");
+    }
+
+}); //End jQuery Block

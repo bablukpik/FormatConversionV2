@@ -26,6 +26,11 @@
     <script src="assets/js/buyer_helper.js" type="application/javascript"></script>
     <script src="assets/js/seller_helper.js" type="application/javascript"></script>
 
+    <?php include(dirname(__FILE__) . '/../dialogs/yesOrNo.php'); ?>
+    <?php include(dirname(__FILE__).'/../dialogs/onlyFinishButton.php'); ?>
+    <?php include(dirname(__FILE__).'/../dialogs/onlyOverwrittingDialog.php'); ?>
+    <?php include(dirname(__FILE__).'/../dialogs/onlyFinishDialogDialogUpperR.php'); ?>
+
     <style>
         .btn-wrapper a {
             box-sizing: border-box;

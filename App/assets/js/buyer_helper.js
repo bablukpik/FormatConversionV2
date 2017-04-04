@@ -29,7 +29,7 @@ jQuery(function ($) {
     });
 
 //Default display none
-    $("#buyer-list").addClass("display_none");
+    //$("#buyer-list").addClass("display_none");
 
 //Buyer/Manufacture/Maker list
     $(document).on("click", function(event){
@@ -64,6 +64,7 @@ jQuery(function ($) {
 //buyer file choice
     $(document).on("click", ".item_manufacturer", function(){
         $("#buyer_file_choice_dialog").removeClass("display_none");
+        $("#buyer-list").addClass("display_none");
 
         var html = "<div id='buyer_file_choice_item' style='margin-bottom: 10px;'>"+
 
@@ -114,21 +115,18 @@ jQuery(function ($) {
             $("#buyer_file_choice_dialog, #buyer-list").addClass("display_none");
             //$("#standard_file_choice_dialog_forBuyer").removeClass("display_none");
             $('#inputReportType').val('maker');
+            sessionStorage.removeItem('sellerPopup');
             startMatching();
         }else{
             alert("メーカーを選んでください");
         }
     });
 
-//In view Overwrite Result sellerPopup will false
-    $('#viewResultOnly').on('click', function (e) {
-        console.log('clicked');
-        sessionStorage.setItem('sellerPopup', 'true');
-    });
 
 //In view Overwrite Result sellerPopup will false
-    $('#viewOverwriteResult').on('click', function (e) {
+    $('#viewOverwriteResult').on('click', function () {
         console.log('clicked');
+        //sessionStorage.removeItem("sellerPopup");
     });
 
 //Standard File Declaration for Buyer and seller
@@ -154,10 +152,48 @@ jQuery(function ($) {
     $("#standard_selection_next_forBuyer").on("click", function(){
         if (standard_file) {
             $("#standard_file_choice_dialog_forBuyer").addClass("display_none");
-            //startMatching();
         }else{
             alert("販売先を選んでください");
         }
     });
 
+}); //End jQuery Block
+
+/// Seller and Buyer List showing according to URL parameter
+function getURLParam( name, url ) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+}
+
+/// Buyer or Seller list display on main screen
+jQuery(function($) {
+    var select = getURLParam('select');
+
+    if (select == 'seller') {
+        $("#seller-list").removeClass("display_none");
+        $("#buyer-list").addClass("display_none");
+    } else if (select == 'manufacturer') {
+        $("#buyer-list").removeClass("display_none");
+        $("#seller-list").addClass("display_none");
+    }
+
+    /// Final report showing according to URL parameter
+    $("#onlyOverwrittingDialogButton").click(function(){
+        console.log('clicked');
+        window.location = 'index.php?action=finalCompareData';
+    });
+
 });
+
+/// Buyer or Seller compared data view
+/*jQuery(function($) {
+    var action = getURLParam('action');
+    if (action == 'home') {
+        compareData();
+    }
+
+});*/

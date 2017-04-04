@@ -170,5 +170,9 @@
             <div id="loading-text"></div>
         </div>
     </div>
-
+    <script>
+        $(document).ready(function () {
+            compareData(); //Data send to index.php?action=compareData
+        });
+    </script>
 <?php include('elements/footer.php'); ?>

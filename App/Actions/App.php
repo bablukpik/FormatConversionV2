@@ -241,11 +241,9 @@ class App extends Presentation {
 
     public function finalCompareData()
     {
-        $_SESSION['clientMakerMapData'];
-        $_SESSION['clientSellerMapData'];
 
-        $array1 = $_SESSION['clientMakerMapData'];
-        $array2 = $_SESSION['clientSellerMapData'];
+        $array1 = isset($_SESSION['clientMakerMapData'])?$_SESSION['clientMakerMapData']:array();
+        $array2 = isset($_SESSION['clientSellerMapData'])?$_SESSION['clientSellerMapData']:array();
 
 /*        $editFields = array('JAN', '商品名', '規格', '発注 単位', '原価 （税抜）', '売価 （税抜）', 'メーカー名', '発売日', '賞味期限');
         $nonEditFields = array("包装形態","保存温度","税込価格","縦","横","奥行","発売予定","新・リ");
