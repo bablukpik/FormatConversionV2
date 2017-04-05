@@ -37,14 +37,16 @@ jQuery(function ($) {
 
 
 //seller file choice
+/*
     $(document).on("click", ".item_seller", function(){
         $("#seller_file_choice_dialog").removeClass("display_none");
+*/
 
         var html = "<div id='seller_file_choice_item' style='margin-bottom: 10px;'>"+
 
-            "<span id='seller_name'>"+seller_name+"</span>"+
+            "<span id='seller_name'>"+/*seller_name+*/"</span>"+
 
-            "<button style='margin-left: 5px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
+            "<button style='margin-left: 30px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
             "browserClientFile();"+">ファイル選択</button>"+
 
@@ -55,7 +57,7 @@ jQuery(function ($) {
             "</div>";
 
         $('#seller_file_choiced').html(html);
-    });
+/*    });*/
 
 
 //seller file choice back
@@ -65,7 +67,8 @@ jQuery(function ($) {
         $('.client_file_name').text('');
         $('.standard_file_name').text('');
         $("#seller_file_choice_dialog").addClass("display_none");
-        $("#seller-list").removeClass("display_none");
+        //$("#seller-list").removeClass("display_none");
+        window.location = 'index.php?action=compareData';
     });
 
 //seller file choice next
@@ -75,6 +78,7 @@ jQuery(function ($) {
             //$("#standard_file_choice_dialog_forSeller").removeClass("display_none");
             //$("#after_seller_file_choice_dialog").removeClass("display_none");
             $('#inputReportType').val('seller');
+            $('#inputCompanyType').val('Don Quixote');
             sessionStorage.setItem("sellerPopup",'true');
             startMatching(); /////////////////////////////////old
         }else{
@@ -95,11 +99,11 @@ jQuery(function ($) {
 
     });
 
-//Data Formation by company type
-    $('.donQuixote').click(function () {
-        $('#inputCompanyType').val('Don Quixote');
-        console.log("Donki");
-    });
+/*//Data Formation by company type
+     $('.donQuixote').click(function () {
+     $('#inputCompanyType').val('Don Quixote');
+     console.log("Donki");
+     });*/
 
 //Standard file choice for Seller next
     $("#standard_selection_next_forSeller").on("click", function(){

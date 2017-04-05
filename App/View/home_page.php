@@ -1,7 +1,7 @@
 <?php include('elements/head.php'); ?>
 <?php include('elements/header.php'); ?>
-<?php include('dialogs/buyer_list_dialog.php'); ?>
-<?php include('dialogs/seller_list_dialog.php'); ?>
+<?php /*include('dialogs/buyer_list_dialog.php'); */?>
+<?php /*include('dialogs/seller_list_dialog.php'); */?>
 <?php include('dialogs/maker_selected_dialog.php'); ?>
 <?php include('dialogs/buyer_file_choice.php'); ?>
 <?php include('dialogs/seller_file_choice.php'); ?>

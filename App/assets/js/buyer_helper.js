@@ -62,15 +62,15 @@ jQuery(function ($) {
 
 
 //buyer file choice
-    $(document).on("click", ".item_manufacturer", function(){
-        $("#buyer_file_choice_dialog").removeClass("display_none");
-        $("#buyer-list").addClass("display_none");
+    /*$(document).on("click", ".item_manufacturer", function(){
+        $("#buyer-list").addClass("display_none");*/
 
+        $("#buyer_file_choice_dialog").removeClass("display_none");
         var html = "<div id='buyer_file_choice_item' style='margin-bottom: 10px;'>"+
 
            /* "<span id='buyer_name'>"+buyer_name+"</span>"+*/
 
-            "<button style='margin-left: 45px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
+            "<button style='margin-left: 30px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
             "browserClientFile();"+">ファイル選択</button>"+
 
@@ -81,7 +81,7 @@ jQuery(function ($) {
             "</div>";
 
         $('#buyer_file_choiced').html(html);
-    });
+/*    });*/
 
 //Client file declaration for buyer and seller
     readExcelFileClient = function(input){
@@ -100,11 +100,13 @@ jQuery(function ($) {
         $("#buyer-list").removeClass("display_none");
     });
 
+/*
 //Data Formation by company type
     $('.itoham').click(function () {
         $('#inputCompanyType').val('Itoham');
         console.log('itoham');
     });
+*/
 
 
 //buyer file choice next
@@ -115,6 +117,7 @@ jQuery(function ($) {
             $("#buyer_file_choice_dialog, #buyer-list").addClass("display_none");
             //$("#standard_file_choice_dialog_forBuyer").removeClass("display_none");
             $('#inputReportType').val('maker');
+            $('#inputCompanyType').val('Itoham');
             sessionStorage.removeItem('sellerPopup');
             startMatching();
         }else{
@@ -174,11 +177,18 @@ jQuery(function($) {
     var select = getURLParam('select');
 
     if (select == 'seller') {
-        $("#seller-list").removeClass("display_none");
-        $("#buyer-list").addClass("display_none");
+        /*$("#seller-list").removeClass("display_none");
+        $("#buyer-list").addClass("display_none");*/
+
+        $("#buyer_file_choice_dialog").addClass("display_none");
+        $("#seller_file_choice_dialog").removeClass("display_none");
+
     } else if (select == 'manufacturer') {
-        $("#buyer-list").removeClass("display_none");
-        $("#seller-list").addClass("display_none");
+        /*$("#buyer-list").removeClass("display_none");
+        $("#seller-list").addClass("display_none");*/
+
+        $("#buyer_file_choice_dialog").removeClass("display_none");
+        $("#seller_file_choice_dialog").addClass("display_none");
     }
 
     /// Final report showing according to URL parameter
