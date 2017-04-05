@@ -68,9 +68,9 @@ jQuery(function ($) {
 
         var html = "<div id='buyer_file_choice_item' style='margin-bottom: 10px;'>"+
 
-            "<span id='buyer_name'>"+buyer_name+"</span>"+
+           /* "<span id='buyer_name'>"+buyer_name+"</span>"+*/
 
-            "<button style='margin-left: 5px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
+            "<button style='margin-left: 45px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
             "browserClientFile();"+">ファイル選択</button>"+
 
@@ -188,12 +188,3 @@ jQuery(function($) {
     });
 
 });
-
-/// Buyer or Seller compared data view
-/*jQuery(function($) {
-    var action = getURLParam('action');
-    if (action == 'home') {
-        compareData();
-    }
-
-});*/
