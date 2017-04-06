@@ -268,13 +268,13 @@ class App extends Presentation {
         }*/
 
         //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
-        $standardAccordingToTdonki = array('新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格14', '縦', '横16', '奥行17', '発売予定', '発売の狙い・コンセプト');
+        $standardAccordingToTdonki = array('新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
 
         $data['clientMapData'] = $array1;
         $data['donkiTitle'] = $standardAccordingToTdonki;
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
-
+        
         return $this->render('final-compared-data', $data);
     }
 

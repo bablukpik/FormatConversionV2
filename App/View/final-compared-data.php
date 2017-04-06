@@ -39,14 +39,18 @@
                             <th rowspan="2">新・リ</th>
                             <th rowspan="2">品名</th>
                             <th rowspan="2">量目</th>
-                            <th rowspan="2">入数</th>
+                            <th rowspan="2">発注単位</th>
                             <th rowspan="2">ＪＡＮＣＤ<br>＜4901231＞</th>
                             <th rowspan="2">包装形態</th>
                             <th rowspan="2">賞味<br>期間</th>
                             <th rowspan="2">保存<br>温度</th>
                             <th colspan="4">税別</th>
                             <th rowspan="2">税込価格</th>
-                            <th colspan="3">商品サイズ（ｍｍ）</th>
+                           <!-- <th colspan="3">商品サイズ（ｍｍ）</th>-->
+                            <th rowspan="2">縦</th>
+                            <th rowspan="2">横</th>
+                            <th rowspan="2">奥行</th>
+
                             <th rowspan="2">発売予定</th>
                             <th rowspan="2">発売の狙い・コンセプト</th>
                         </tr>
@@ -55,10 +59,6 @@
                             <th>本体価格案</th>
                             <th>値入％</th>
                             <th>希望小売価格</th>
-
-                            <th>縦</th>
-                            <th>横</th>
-                            <th>奥行</th>
                         </tr>
                         </thead>
                         <tbody>

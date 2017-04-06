@@ -171,7 +171,7 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+        $(document).on('ready',function () {
             compareData(); //Data send to index.php?action=compareData
         });
     </script>
