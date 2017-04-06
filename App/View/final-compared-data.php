@@ -65,7 +65,8 @@
                             <?php foreach ($clientMapData as $k => $row) : ?>
 
                                 <tr>
-                                    <td rowspan="4">伊都ハム</td>
+                                    <!--<td rowspan="4">伊都ハム</td>-->
+                                    <td></td>
                                     <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 if ($title=='JAN'){
@@ -79,6 +80,7 @@
                                     <?php endforeach; ?>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';
@@ -86,6 +88,7 @@
                                     <?php endforeach; ?>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';
@@ -93,6 +96,7 @@
                                     <?php endforeach; ?>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';

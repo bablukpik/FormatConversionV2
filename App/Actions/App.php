@@ -274,7 +274,7 @@ class App extends Presentation {
         $data['donkiTitle'] = $standardAccordingToTdonki;
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
-        
+
         return $this->render('final-compared-data', $data);
     }
 
