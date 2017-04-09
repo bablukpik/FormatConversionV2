@@ -39,7 +39,7 @@
                             <th rowspan="2">新・リ</th>
                             <th rowspan="2">品名</th>
                             <th rowspan="2">量目</th>
-                            <th rowspan="2">発注単位</th>
+                            <th rowspan="2">入数○</th>
                             <th rowspan="2">ＪＡＮＣＤ<br>＜4901231＞</th>
                             <th rowspan="2">包装形態</th>
                             <th rowspan="2">賞味<br>期間</th>
