@@ -22,7 +22,7 @@
     </div>
     <div class="cl"></div>
     <form id="header-form" method="post" enctype="multipart/form-data" action="index.php?action=home">
-        <input type="file" name="client-data" onchange="readExcelFileClient(this)" />
+        <input type="file" id="inputClientData" name="client-data" onchange="readExcelFileClient(this)" />
         <input type="file" name="server-data" onchange="readExcelFileStadard(this)" />
         <input type="text" id="inputReportType" name="report-type" value="" />
         <input type="text" id="inputCompanyType" name="company-type" value="" />
