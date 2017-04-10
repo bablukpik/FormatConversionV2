@@ -70,8 +70,13 @@ function startMatching() {
 /**
  * Browser client file
  */
-function browserClientFile() {
-    $("input[name=client-data]").attr("accept","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel");
+function browserClientFile(fileType) {
+    if (fileType == 'itoham'){
+        $("input[name=client-data]").attr("accept","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    }else if(fileType == 'donki'){
+        $("input[name=client-data]").attr("accept","application/vnd.ms-excel");
+    }
+
     $("input[name=client-data]").trigger('click');
 }
 

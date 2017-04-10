@@ -48,7 +48,7 @@ jQuery(function ($) {
 
             "<button style='margin-left: 30px; display: inline-block; background: #2471a3; border: 1px solid #2E86C1; font-size: 13px; padding: 10px; border-radius: 5px; color: white;' onclick="+
 
-            "browserClientFile();"+">ファイル選択</button>"+
+            "browserClientFile('donki');"+">ファイル選択</button>"+
 
             //"<input id='input_excel_file_seller' data-id='"+seller_id+"' data-name='"+seller_name+"' type='file' accept='application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' style='display: none; width:0; height: 0;' required='' onchange='readExcelFileMaker(this)'>"+
 
