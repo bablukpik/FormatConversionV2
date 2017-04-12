@@ -172,7 +172,19 @@
     </div>
     <script>
         $(document).on('ready',function () {
-            compareData(); //Data send to index.php?action=compareData
+
+            var action = getURLParam('action');
+
+            if (action == 'viewMapData') {
+                $("#viewMapDataOverwriteDialog").removeClass("display_none");
+            }else {
+                compareData(); //Data send to index.php?action=compareData
+            }
+
+            $('#viewMapDataOverwriteButton').on('click', function () {
+                compareData(); //Data send to index.php?action=compareData
+            });
+
         });
     </script>
 <?php include('elements/footer.php'); ?>

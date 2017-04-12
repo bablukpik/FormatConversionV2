@@ -120,6 +120,65 @@ class App extends Presentation {
         return $this->render('home', $data);
     }
 
+    //View Map Data page
+    public function viewMapData(){
+        $data['serverData'] = isset($_SESSION['serverData'])?$_SESSION['serverData']:array();
+        $data['clientData'] = isset($_SESSION['clientData'])?$_SESSION['clientData']:array();
+
+
+        // Initial data
+        // Get list similar words
+        $listBasicWords = MapData::getListBasicWords();
+        $arrDataSimilar = MapData::getListSimilar();
+
+        // Add basic word to list
+        if ($listBasicWords) {
+            foreach ($listBasicWords as $basicWord) {
+                if (!empty($basicWord['basic_word'])) {
+                    $word = str_replace(' ', '', $basicWord['basic_word']);
+                    $data['listIndex'][$word] = $basicWord['id'];
+                    $data['listSimilar'][$basicWord['id']][]     = $word;
+                }
+            }
+        }
+
+        // Rebuild array list to check
+        if ($arrDataSimilar) {
+            foreach ($arrDataSimilar as $similar) {
+                if (!empty($similar['similar_word'])) {
+                    $word = str_replace(' ', '', $similar['similar_word']);
+                    $data['listIndex'][$word]      = $similar['basic_word_id'];
+                    $data['listSimilar'][$similar['basic_word_id']][] = $word;
+                }
+            }
+        }
+
+        $data['hasData'] = false;
+        $data['first'] = true;
+
+        if ($data['clientData'] && $data['serverData']) {
+
+            $titles = array_shift($data['serverData']);
+            foreach ($titles as $key => $title) {
+                $titles[$key] = preg_replace("/\s/", '', $title);
+            }
+            array_unshift($data['serverData'], $titles);
+
+            // Set data
+            $_SESSION['serverData'] = $data['serverData'];
+            $_SESSION['clientData'] = $data['clientData'];
+            $data['hasData'] = true;
+
+            // Get list matchCount
+            $data['matchCount'] = MatchCount::getList();
+        }
+
+        $data['first'] = false;
+
+        return $this->render('home', $data);
+    }
+
+    //Home page
     public function page(){
         //Member::checkLogin();
         $data = array();

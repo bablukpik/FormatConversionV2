@@ -76,10 +76,20 @@ function browserClientFile(fileType) {
     }else if(fileType == 'donki'){
         $("input[name=client-data]").attr("accept","application/vnd.ms-excel");
     }*/
-    
+
     $("input[name=client-data]").attr("accept","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel");
     $("input[name=client-data]").trigger('click');
 }
+
+//View map data between two files
+jQuery(function($) {
+
+    $('#viewMapData').on('click', function (e) {
+        e.preventDefault();
+        window.location = 'index.php?action=viewMapData';
+    });
+});
+
 
 /**
  * Browser server file
@@ -311,6 +321,7 @@ function handleRemoveLine() {
     });
 }
 
+
 /**
  * Do compare data
  */
@@ -342,6 +353,17 @@ function compareData() {
     });*/
 }
 
+//Export to Excel didplay block
+$(document).on('ready',function () {
+
+    var action = getURLParam('action');
+
+    if (action == 'finalCompareData') {
+        $("#ExportToExcel").removeClass("display_none");
+    }else{
+        $("#ExportToExcel").addClass("display_none");
+    }
+});
 
 
 /**

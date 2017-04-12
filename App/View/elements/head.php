@@ -30,6 +30,7 @@
     <?php include(dirname(__FILE__).'/../dialogs/onlyFinishButton.php'); ?>
     <?php include(dirname(__FILE__).'/../dialogs/onlyOverwrittingDialog.php'); ?>
     <?php include(dirname(__FILE__).'/../dialogs/onlyFinishDialogDialogUpperR.php'); ?>
+    <?php include(dirname(__FILE__).'/../dialogs/viewMapDataOverwriteDialog.php'); ?>
 
     <style>
         .btn-wrapper a {

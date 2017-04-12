@@ -8,7 +8,7 @@
     <div class="fr btn-wrapper">
 
         <!--<a href="index.php?action=page&select=manufacturer" id="buyer_posting" title="Maker" class="btn btn-primary">メーカー</a>-->
-        <a href="#" title="Link match data" class="btn btn-primary">リンク図</a>
+        <a href="#" id="viewMapData" class="btn btn-primary" title="view map data">リンク図</a>
 
         <!-- <a href="javascript:startMatching()" title="Link match data" class="btn btn-primary">リンク図</a> -->
 
@@ -20,6 +20,7 @@
         <!--<a href="index.php?action=page&select=seller" id="seller_posting" title="Sales destination" class="btn btn-primary">完了</a>-->
         <!--<a href="#" id="seller_posting" title="Sales destination" class="btn btn-primary">完了</a>-->
     </div>
+
     <div class="cl"></div>
     <form id="header-form" method="post" enctype="multipart/form-data" action="index.php?action=home">
         <input type="file" id="inputClientData" name="client-data" onchange="readExcelFileClient(this)" />
@@ -28,3 +29,4 @@
         <input type="text" id="inputCompanyType" name="company-type" value="" />
     </form>
 </header>
+<a href="javascript:exportCompareData()" id="ExportToExcel" title="Export to Excel" class="btn btn-default pull-right display_none">Export to Excel</a>
