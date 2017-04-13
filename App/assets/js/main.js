@@ -367,6 +367,19 @@ $(document).on('ready',function () {
 
 
 /**
+ * Export to Excel Final compared data
+ */
+/*
+function exportFinalComparedData() {
+    var form = $('<form>').attr('action', 'index.php?action=exportFinalComparedData').attr('method','post').appendTo('body');
+    $('<textarea>').attr('name','mapsData').html(JSON.stringify(mapsData)).appendTo(form);
+    form[0].submit();
+    form.remove();
+}
+*/
+
+
+/**
  * Do compare data
  */
 function exportCompareData() {

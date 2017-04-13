@@ -5,9 +5,12 @@ use Library\Presentation;
 use Library\DBHelper;
 use Library\Spreadsheet_Excel_Reader;
 use \PHPExcel_Cell;
+use \PHPExcel_Style_Alignment;
+use \PHPExcel_Style_Fill;
 use \PHPExcel_Cell_AdvancedValueBinder;
 use \PHPExcel;
 use \PHPExcel_IOFactory;
+use \PHPExcel_Style_Border;
 
 require_once LIB_PATH . DIRECTORY_SEPARATOR . 'PHPExcel.php';
 
@@ -330,11 +333,155 @@ class App extends Presentation {
         $standardAccordingToTdonki = array('新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
 
         $data['clientMapData'] = $array1;
+        $_SESSION['donkiTitle'] = $standardAccordingToTdonki; //For export excel
         $data['donkiTitle'] = $standardAccordingToTdonki;
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
         return $this->render('final-compared-data', $data);
+    }
+
+
+    /**
+     * Export final compared data
+     */
+    public function exportFinalComparedData(){
+        $cSheetTitles = array();
+        //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
+
+        $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
+        $cSheetTitlesRow2 = array('', '', '', '', '', '', '', '', '','卸', '本体価格案', '値入％	', '希望小売価格','','','','','','');
+
+        $donkiTitle = isset($_SESSION['donkiTitle'])?$_SESSION['donkiTitle']:array();
+        $clientMakerMapData = isset($_SESSION['clientMakerMapData'])?$_SESSION['clientMakerMapData']:array();
+
+        //$serverData = $_SESSION['serverData'];
+        //$titles = reset($serverData);
+
+        $exportData = array();
+
+        foreach ($clientMakerMapData as $k => $row) {
+            $rowData = array();
+            foreach ($donkiTitle as $title) {
+                $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+            }
+            $exportData[] = $rowData;
+        }
+
+        array_unshift($exportData, $cSheetTitlesRow1, $cSheetTitlesRow2);
+        array_unshift($exportData[2], '');
+
+        // Set value binder
+        PHPExcel_Cell::setValueBinder( new PHPExcel_Cell_AdvancedValueBinder() );
+
+        // Create new PHPExcel object
+        $objPHPExcel = new PHPExcel();
+
+        // Set document properties
+        $objPHPExcel->getProperties()->setCreator("Anonimous")
+            ->setLastModifiedBy("Anonimous")
+            ->setTitle("Office 2007 XLSX Test Document")
+            ->setSubject("Office 2007 XLSX Test Document")
+            ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("Test result file");
+
+        $activeSheet = $objPHPExcel->setActiveSheetIndex(0);
+        //$headers = array_keys(reset($exportData));
+        //array_unshift($exportData, $headers);
+
+        $activeSheet->fromArray($exportData, NULL, 'A1');
+
+        //Merge cells
+        $activeSheet->mergeCells('A1:A2');
+        $activeSheet->mergeCells('B1:B2');
+        $activeSheet->mergeCells('C1:C2');
+        $activeSheet->mergeCells('D1:D2');
+        $activeSheet->mergeCells('E1:E2');
+        $activeSheet->mergeCells('F1:F2');
+        $activeSheet->mergeCells('G1:G2');
+        $activeSheet->mergeCells('H1:H2');
+        $activeSheet->mergeCells('I1:I2');
+
+        $activeSheet->mergeCells('J1:M1');
+
+        $activeSheet->mergeCells('N1:N2');
+        $activeSheet->mergeCells('O1:O2');
+        $activeSheet->mergeCells('P1:P2');
+        $activeSheet->mergeCells('Q1:Q2');
+        $activeSheet->mergeCells('R1:R2');
+        $activeSheet->mergeCells('S1:S2');
+
+        // Default Styles
+        $defaultStyle = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,
+            )
+        );
+
+        //Title styles
+        $titleStyle = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            ),
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => 'CCFFCC')
+            ),
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+
+        //After title style
+        $afterTitleStyle= array(
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+
+
+        //Default style
+        $objPHPExcel->getDefaultStyle()->applyFromArray($defaultStyle);
+
+        //Title style
+        $activeSheet->getStyle("A1:S2")->applyFromArray($titleStyle);
+
+        //After Title style
+        $n = count($exportData) + 2;
+        $activeSheet->getStyle("A3:S$n")->applyFromArray($afterTitleStyle);
+
+//        for($i=3; $i<=$n; $i++){
+//            $activeSheet->getStyle("A$i:S$i")->applyFromArray($afterTitleStyle);
+//        }
+
+
+
+        $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        $writerName = 'Excel2007';
+        $fullName = "exportCompareData.xlsx";
+
+        // Redirect output to a clientâ€™s web browser (Excel5)
+        header('Content-Type: '.$contentType);
+        header('Content-Disposition: attachment;filename="'.$fullName.'"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $writerName);
+        $objWriter->save('php://output');
     }
 
     /**

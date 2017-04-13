@@ -113,6 +113,7 @@
         <?php endif; ?>
     </div>
 </div>
+
 <script>
     $('<td style="padding: 1px;">').insertAfter('.border_separator');
     var non_editable =$('.non_editable');

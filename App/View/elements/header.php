@@ -29,4 +29,5 @@
         <input type="text" id="inputCompanyType" name="company-type" value="" />
     </form>
 </header>
-<a href="javascript:exportCompareData()" id="ExportToExcel" title="Export to Excel" class="btn btn-default pull-right display_none">Export to Excel</a>
+<!--<a href="javascript:exportFinalComparedData()" id="ExportToExcel" title="Export to Excel" class="btn btn-default pull-right display_none" style="margin-right: 5px;">Export to Excel</a>-->
+<a href="index.php?action=exportFinalComparedData" id="ExportToExcel" title="Export to Excel" class="btn btn-default pull-right display_none" style="margin-right: 5px;">Export to Excel</a>
