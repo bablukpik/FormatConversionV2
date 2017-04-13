@@ -352,6 +352,8 @@ class App extends Presentation {
         $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
         $cSheetTitlesRow2 = array('', '', '', '', '', '', '', '', '','卸', '本体価格案', '値入％	', '希望小売価格','','','','','','');
 
+        $donkiTitle = array();
+        $clientMakerMapData = array();
         $donkiTitle = isset($_SESSION['donkiTitle'])?$_SESSION['donkiTitle']:array();
         $clientMakerMapData = isset($_SESSION['clientMakerMapData'])?$_SESSION['clientMakerMapData']:array();
 
