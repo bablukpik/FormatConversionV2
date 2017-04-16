@@ -269,9 +269,9 @@ class App extends Presentation {
             $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
 
+        /*
         $clientDataArr = $_SESSION[$sessionKeyName];
-
-        //Table edited data for Buyer and Seller
+      //Table edited data for Buyer and Seller
         if (isset($_POST['janCode'])){
             $janCode = $_POST['janCode'];
             $fieldName = $_POST['fieldName'];
@@ -285,7 +285,7 @@ class App extends Presentation {
                    break;
                }
             }
-        }
+        }*/
 
 
         // Update match count for matchData
