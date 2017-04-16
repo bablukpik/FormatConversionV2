@@ -353,8 +353,9 @@ class App extends Presentation {
         $cSheetTitles = array();
         //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
 
-        $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
-        $cSheetTitlesRow2 = array('', '', '', '', '', '', '', '', '','卸', '本体価格案', '値入％	', '希望小売価格','','','','','','');
+        $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '商品サイズ（ｍｍ）','','','','', '発売予定', '発売の狙い・コンセプト');
+
+        $cSheetTitlesRow2 = array('', '', '', '', '', '', '', '', '','卸', '本体価格案', '値入％	', '希望小売価格','', '縦','','横','','奥行', '','');
 
         $donkiTitle = array();
         $clientMakerMapData = array();
@@ -366,16 +367,34 @@ class App extends Presentation {
 
         $exportData = array();
 
+        $exportData[0] = $cSheetTitlesRow1;
+        $exportData[1] = $cSheetTitlesRow2;
+
         foreach ($clientMakerMapData as $k => $row) {
             $rowData = array();
-            foreach ($donkiTitle as $title) {
-                $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+
+            foreach ($clientMakerMapData as $k => $row) {
+                $rowData = array();
+                $i = 0;
+
+                foreach ($donkiTitle as $title) {
+                    $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+                    if ($i == 14) {
+                        $rowData['x1'] = 'x';
+                    } else if ($i == 15) {
+                        $rowData['x2'] = 'x';
+                    }
+                    $i++;
+                }
+                $exportData[] = $rowData;
             }
-            $exportData[] = $rowData;
         }
 
-        array_unshift($exportData, $cSheetTitlesRow1, $cSheetTitlesRow2);
-        array_unshift($exportData[2], '');
+
+        // array_unshift($exportData, $cSheetTitlesRow1, $cSheetTitlesRow2);
+        //array_unshift($exportData[2], '');
+
+
 
         // Set value binder
         PHPExcel_Cell::setValueBinder( new PHPExcel_Cell_AdvancedValueBinder() );
@@ -412,11 +431,17 @@ class App extends Presentation {
         $activeSheet->mergeCells('J1:M1');
 
         $activeSheet->mergeCells('N1:N2');
-        $activeSheet->mergeCells('O1:O2');
+        /* $activeSheet->mergeCells('O1:O2');
         $activeSheet->mergeCells('P1:P2');
-        $activeSheet->mergeCells('Q1:Q2');
-        $activeSheet->mergeCells('R1:R2');
-        $activeSheet->mergeCells('S1:S2');
+        $activeSheet->mergeCells('Q1:Q2');*/
+        /*$activeSheet->mergeCells('R1:R2');
+        $activeSheet->mergeCells('S1:S2');*/
+
+        $activeSheet->mergeCells('O1:S1');
+
+        $n = count($exportData)+2;
+        $activeSheet->mergeCells("A3:A$n");
+        $activeSheet->mergeCells("U3:U$n");
 
         // Default Styles
         $defaultStyle = array(
@@ -457,11 +482,11 @@ class App extends Presentation {
         $objPHPExcel->getDefaultStyle()->applyFromArray($defaultStyle);
 
         //Title style
-        $activeSheet->getStyle("A1:S2")->applyFromArray($titleStyle);
+        $activeSheet->getStyle("A1:U2")->applyFromArray($titleStyle);
 
         //After Title style
         $n = count($exportData) + 2;
-        $activeSheet->getStyle("A3:S$n")->applyFromArray($afterTitleStyle);
+        $activeSheet->getStyle("A3:U$n")->applyFromArray($afterTitleStyle);
 
 //        for($i=3; $i<=$n; $i++){
 //            $activeSheet->getStyle("A$i:S$i")->applyFromArray($afterTitleStyle);
