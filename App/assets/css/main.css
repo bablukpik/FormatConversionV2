@@ -84,6 +84,9 @@
 .border_less_col{
     border: none !important;
 }
+.border_less_col:last-child{
+    border-bottom: 1px solid #333 !important;
+}
 
 /* end bablu */
 

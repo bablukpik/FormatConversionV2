@@ -77,8 +77,6 @@
 
                                 <tr>
                                     <!--<td rowspan="4">伊都ハム</td>-->
-                                    <!--1st col-->
-                                    <td></td>
 
                                     <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
@@ -89,56 +87,20 @@
                                                 }
 
                                         ?></div></td>
+                                        <?php
 
-                                    <?php endforeach; ?>
-                                    <?php
-                                        if ($row=='縦'){
+                                        /*<!--new tow cols added-->*/
+                                        if ($title=='縦'){
                                             echo "<td>X</td>";
                                         }
-                                    ?>
-                                    <!--new tow cols added-->
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <!--1st col-->
-                                    <td></td>
-                                    <?php foreach ($titles as $title) : ?>
-                                        <td><div contenteditable="true" class="cell"><?php
-                                                echo '<br>';
-                                            ?></div></td>
+                                        if ($title=='横'){
+                                            echo "<td>X</td>";
+                                        }
+                                        ?>
                                     <?php endforeach; ?>
-
-                                    <!--new tow cols added-->
-                                    <td></td>
-                                    <td></td>
                                 </tr>
-                                <tr>
-                                    <!--1st col-->
-                                    <td></td>
-                                    <?php foreach ($titles as $title) : ?>
-                                        <td><div contenteditable="true" class="cell"><?php
-                                                echo '<br>';
-                                            ?></div></td>
-                                    <?php endforeach; ?>
 
-                                    <!--new tow cols added-->
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <!--1st col-->
-                                    <td></td>
-                                    <?php foreach ($titles as $title) : ?>
-                                        <td><div contenteditable="true" class="cell"><?php
-                                                echo '<br>';
-                                            ?></div></td>
-                                    <?php endforeach; ?>
 
-                                    <!--new tow cols added-->
-                                    <td></td>
-                                    <td></td>
-                                </tr>
 
                             <?php endforeach; ?>
                         </tbody>
