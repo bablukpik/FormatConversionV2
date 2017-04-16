@@ -48,6 +48,7 @@
                     <?php foreach ($clientMapData as $k => $row) : ?>
                         <tr data-jan-code="<?php echo $row['JAN']; ?>">
                             <?php foreach ($titles as $title) : ?>
+
                                 <td class="<?php echo $title == '賞味期限'?'border_separator':''?><?php echo $title == '包装形態'?'border_separator2':''?>">
                                         <div data-id="<?php echo $k; ?>" data-field-name="<?php echo $title; ?>" contenteditable="true" class="cell <?php echo $title == '包装形態' || $title == '保存温度' || $title == '税込価格' || $title == '縦' || $title == '横' || $title == '奥行' || $title == '発売予定' || $title == '新・リ'?' non_editable':''?>"><?php
                                                 if($title == 'NO') {  //$title= Table title or field name

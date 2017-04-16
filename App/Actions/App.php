@@ -298,6 +298,9 @@ class App extends Presentation {
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
         $data['clientMapData'] = $_SESSION[$sessionKeyName];
+
+        //var_dump($data);
+
         return $this->render('compared-data-page', $data);
     }
 
@@ -330,7 +333,7 @@ class App extends Presentation {
         }*/
 
         //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
-        $standardAccordingToTdonki = array('ブランド/セグメント', '新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
+        $standardAccordingToTdonki = array(/*'ブランド/セグメント', */'新・リ', '商品名', '規格', '発注単位', 'JAN', '包装形態', '賞味期限', '保存温度', '卸', '原価（税抜）', '値入％', '売価（税抜）', '税込価格', '縦', '横', '奥行', '発売予定'/*, '発売の狙い・コンセプト'*/);
 
         $data['clientMapData'] = $array1;
         $_SESSION['donkiTitle'] = $standardAccordingToTdonki; //For export excel

@@ -308,6 +308,7 @@ class Convert {
                 unset($arrayData[$key]);
         }
 
+//        die(var_dump($arrayData));
         return $arrayData;
     }
 

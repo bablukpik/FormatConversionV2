@@ -10,6 +10,12 @@
         border-left: 3px solid black !important;
         padding-left: 5px !important;
     }
+    .final_table_row .borderless_col_right{
+             border-bottom: none !important;
+         }
+    .final_table_row:last-child{
+        border-bottom: 1px solid #333;
+    }
 </style>
 
 <div class="container-fluid">
@@ -73,11 +79,17 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <?php $totalNumoRow = count($clientMapData);
+                            $totalNumoRow = $totalNumoRow+1;
+                            ?>
+
+                            <tr>
+                                <td rowspan="<?php echo isset($totalNumoRow)?$totalNumoRow:''; ?>"></td>
+                            </tr>
+
                             <?php foreach ($clientMapData as $k => $row) : ?>
 
-                                <tr>
-                                    <!--<td rowspan="4">伊都ハム</td>-->
-
+                                <tr class="final_table_row">
                                     <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 if ($title=='JAN'){
@@ -91,18 +103,17 @@
 
                                         /*<!--new tow cols added-->*/
                                         if ($title=='縦'){
-                                            echo "<td>X</td>";
+                                            echo "<td>X&nbsp;</td>";
                                         }
                                         if ($title=='横'){
-                                            echo "<td>X</td>";
+                                            echo "<td>X&nbsp;</td>";
                                         }
                                         ?>
                                     <?php endforeach; ?>
+                                    <td class="borderless_col_right">&nbsp;</td>
                                 </tr>
-
-
-
                             <?php endforeach; ?>
+
                         </tbody>
                     </table>
                 </div>

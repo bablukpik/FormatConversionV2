@@ -81,10 +81,10 @@
     overflow: hidden;
 }
 
-.border_less_col{
+.borderless_col{
     border: none !important;
 }
-.border_less_col:last-child{
+.borderless_col:last-child{
     border-bottom: 1px solid #333 !important;
 }
 
