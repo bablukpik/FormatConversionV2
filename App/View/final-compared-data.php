@@ -44,21 +44,32 @@
                             <th rowspan="2">包装形態</th>
                             <th rowspan="2">賞味<br>期間</th>
                             <th rowspan="2">保存<br>温度</th>
+
+                            <!--2nd row and 1st 4 cols-->
                             <th colspan="4">税別</th>
+
                             <th rowspan="2">税込価格</th>
-                           <!-- <th colspan="3">商品サイズ（ｍｍ）</th>-->
-                            <th rowspan="2">縦</th>
-                            <th rowspan="2">横</th>
-                            <th rowspan="2">奥行</th>
+
+                            <!--2nd row and 2nd 5 cols-->
+                            <th colspan="5">商品サイズ（ｍｍ）</th>
 
                             <th rowspan="2">発売予定</th>
                             <th rowspan="2">発売の狙い・コンセプト</th>
                         </tr>
                         <tr class="bg-header">
+                            <!--2nd row 1st 4 cols-->
                             <th>卸</th>
                             <th>本体価格案</th>
                             <th>値入％</th>
                             <th>希望小売価格</th>
+
+                            <!--2nd row 2nd 3 cols-->
+                            <th rowspan="2">縦</th>
+                            <th rowspan="2">&nbsp;</th>
+                            <th rowspan="2">横</th>
+                            <th rowspan="2">&nbsp;</th>
+                            <th rowspan="2">奥行</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -66,7 +77,9 @@
 
                                 <tr>
                                     <!--<td rowspan="4">伊都ハム</td>-->
+                                    <!--1st col-->
                                     <td></td>
+
                                     <?php foreach ($donkiTitle as $title) :  ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 if ($title=='JAN'){
@@ -75,33 +88,56 @@
                                                     echo isset($row[$title]) ? $row[$title]:'';
                                                 }
 
-
                                         ?></div></td>
+
                                     <?php endforeach; ?>
+                                    <?php
+                                        if ($row=='縦'){
+                                            echo "<td>X</td>";
+                                        }
+                                    ?>
+                                    <!--new tow cols added-->
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
+                                    <!--1st col-->
                                     <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';
                                             ?></div></td>
                                     <?php endforeach; ?>
+
+                                    <!--new tow cols added-->
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
+                                    <!--1st col-->
                                     <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';
                                             ?></div></td>
                                     <?php endforeach; ?>
+
+                                    <!--new tow cols added-->
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
+                                    <!--1st col-->
                                     <td></td>
                                     <?php foreach ($titles as $title) : ?>
                                         <td><div contenteditable="true" class="cell"><?php
                                                 echo '<br>';
                                             ?></div></td>
                                     <?php endforeach; ?>
+
+                                    <!--new tow cols added-->
+                                    <td></td>
+                                    <td></td>
                                 </tr>
 
                             <?php endforeach; ?>

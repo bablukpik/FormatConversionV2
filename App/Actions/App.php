@@ -335,6 +335,9 @@ class App extends Presentation {
         $data['clientMapData'] = $array1;
         $_SESSION['donkiTitle'] = $standardAccordingToTdonki; //For export excel
         $data['donkiTitle'] = $standardAccordingToTdonki;
+
+        //var_dump($data);
+
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
 
