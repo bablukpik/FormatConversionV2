@@ -269,7 +269,7 @@ class App extends Presentation {
             $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
 
-        /*
+
         $clientDataArr = $_SESSION[$sessionKeyName];
       //Table edited data for Buyer and Seller
         if (isset($_POST['janCode'])){
@@ -285,7 +285,7 @@ class App extends Presentation {
                    break;
                }
             }
-        }*/
+        }
 
 
         // Update match count for matchData
@@ -298,9 +298,6 @@ class App extends Presentation {
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
         $data['clientMapData'] = $_SESSION[$sessionKeyName];
-
-        //var_dump($data);
-
         return $this->render('compared-data-page', $data);
     }
 
