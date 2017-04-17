@@ -103,10 +103,10 @@
 
                                         /*<!--new tow cols added-->*/
                                         if ($title=='縦'){
-                                            echo "<td>X&nbsp;</td>";
+                                            echo "<td style='font-size:12px;text-align: center;'>X</td>";
                                         }
                                         if ($title=='横'){
-                                            echo "<td>X&nbsp;</td>";
+                                            echo "<td style='font-size:12px; text-align: center;'>X</td>";
                                         }
                                         ?>
                                     <?php endforeach; ?>

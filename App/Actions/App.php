@@ -370,26 +370,31 @@ class App extends Presentation {
         $exportData[0] = $cSheetTitlesRow1;
         $exportData[1] = $cSheetTitlesRow2;
 
+        //die(var_dump($clientMakerMapData));
+
         foreach ($clientMakerMapData as $k => $row) {
             $rowData = array();
+            $i = 0;
 
-            foreach ($clientMakerMapData as $k => $row) {
-                $rowData = array();
-                $i = 0;
-
-                foreach ($donkiTitle as $title) {
-                    $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
-                    if ($i == 14) {
-                        $rowData['x1'] = 'x';
-                    } else if ($i == 15) {
-                        $rowData['x2'] = 'x';
-                    }
-                    $i++;
+            foreach ($donkiTitle as $title) {
+                $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+                if ($i == 13) {
+                    $rowData['x1'] = 'x';
+                } else if ($i == 14) {
+                    $rowData['x2'] = 'x';
                 }
-                $exportData[] = $rowData;
+                $i++;
             }
+            $exportData[] = $rowData;
         }
 
+        $nn = count($exportData);
+        for ($i=2; $i<$nn; $i++){
+            array_unshift($exportData[$i], '');
+        }
+
+
+        //die(var_dump($exportData));
 
         // array_unshift($exportData, $cSheetTitlesRow1, $cSheetTitlesRow2);
         //array_unshift($exportData[2], '');
@@ -431,6 +436,9 @@ class App extends Presentation {
         $activeSheet->mergeCells('J1:M1');
 
         $activeSheet->mergeCells('N1:N2');
+
+        $activeSheet->mergeCells('T1:T2');
+        $activeSheet->mergeCells('U1:U2');
         /* $activeSheet->mergeCells('O1:O2');
         $activeSheet->mergeCells('P1:P2');
         $activeSheet->mergeCells('Q1:Q2');*/
@@ -450,8 +458,10 @@ class App extends Presentation {
                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,
             )
         );
+        //Default style
+        $objPHPExcel->getDefaultStyle()->applyFromArray($defaultStyle);
 
-        //Title styles
+        //Title style
         $titleStyle = array(
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
@@ -467,6 +477,8 @@ class App extends Presentation {
                 )
             )
         );
+        //Title style
+        $activeSheet->getStyle("A1:U2")->applyFromArray($titleStyle);
 
         //After title style
         $afterTitleStyle= array(
@@ -476,14 +488,6 @@ class App extends Presentation {
                 )
             )
         );
-
-
-        //Default style
-        $objPHPExcel->getDefaultStyle()->applyFromArray($defaultStyle);
-
-        //Title style
-        $activeSheet->getStyle("A1:U2")->applyFromArray($titleStyle);
-
         //After Title style
         $n = count($exportData) + 2;
         $activeSheet->getStyle("A3:U$n")->applyFromArray($afterTitleStyle);
@@ -491,6 +495,43 @@ class App extends Presentation {
 //        for($i=3; $i<=$n; $i++){
 //            $activeSheet->getStyle("A$i:S$i")->applyFromArray($afterTitleStyle);
 //        }
+
+        //No specific cell border
+        $noBorder = array(
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_NONE
+                )
+            )
+        );
+        //No specific cell border
+        $activeSheet->getStyle("O2:S$n")->applyFromArray($noBorder);
+
+        //Set last cell border
+        $setLastBorder = array(
+            'borders' => array(
+                'bottom' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+        //Set last cell border
+        $activeSheet->getStyle("O$n:S$n")->applyFromArray($setLastBorder);
+
+        //Set last cell border of title
+        $setLastTitleBorder = array(
+            'borders' => array(
+                'bottom' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+        //Set last cell border of title
+        $activeSheet->getStyle("O2:S2")->applyFromArray($setLastTitleBorder);
+
+        //Set cell width
+        $activeSheet->getColumnDimension('P')->setWidth(2.5);
+        $activeSheet->getColumnDimension('R')->setWidth(2.5);
 
 
 
