@@ -33,7 +33,7 @@
             // Get title
             $titles = reset($serverData);
             ?>
-            <div class="data-wrapper w-100 ml-0">
+            <div class="data-wrapper w-100 ml-0 outsideborder">
                 <table class="row-content">
                     <thead>
                     <tr class="bg-header">

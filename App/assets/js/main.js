@@ -81,6 +81,8 @@ function browserClientFile(fileType) {
     $("input[name=client-data]").trigger('click');
 }
 
+/*Bablu*/
+
 //View map data between two files
 jQuery(function($) {
 
@@ -90,6 +92,7 @@ jQuery(function($) {
     });
 });
 
+/*/Bablu*/
 
 /**
  * Browser server file

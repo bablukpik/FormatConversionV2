@@ -176,12 +176,13 @@
             var action = getURLParam('action');
 
             if (action == 'viewMapData') {
-                $("#viewMapDataOverwriteDialog").removeClass("display_none");
+                $("#viewMapDataBackBtn").removeClass("display_none");
             }else {
                 compareData(); //Data send to index.php?action=compareData
             }
 
-            $('#viewMapDataOverwriteButton').on('click', function () {
+            $('#viewMapDataBackBtn').on('click', function () {
+                event.preventDefault();
                 compareData(); //Data send to index.php?action=compareData
             });
 

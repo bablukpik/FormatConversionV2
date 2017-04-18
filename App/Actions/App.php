@@ -278,7 +278,7 @@ class App extends Presentation {
         if ($data['clientMapData']) {
             $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
-        
+
         $clientDataArr = $_SESSION[$sessionKeyName];
       //Table edited data for Buyer and Seller
         if (isset($_POST['janCode'])){
@@ -349,7 +349,8 @@ class App extends Presentation {
 
         //$data['clientMapData'] = $array3;
         //$data['clientMapData'] = array_merge($_SESSION['clientMakerMapData'], $_SESSION['clientSellerMapData']);
-
+        /*var_dump($_SESSION);
+        exit;*/
         return $this->render('final-compared-data', $data);
     }
 
@@ -545,7 +546,7 @@ class App extends Presentation {
 
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         $writerName = 'Excel2007';
-        $fullName = "exportCompareData.xlsx";
+        $fullName = "エクセル出力.xlsx";
 
         // Redirect output to a clientâ€™s web browser (Excel5)
         header('Content-Type: '.$contentType);
