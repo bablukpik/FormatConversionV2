@@ -11,6 +11,7 @@ use \PHPExcel_Cell_AdvancedValueBinder;
 use \PHPExcel;
 use \PHPExcel_IOFactory;
 use \PHPExcel_Style_Border;
+use \PHPExcel_Shared_Font;
 
 require_once LIB_PATH . DIRECTORY_SEPARATOR . 'PHPExcel.php';
 
@@ -460,6 +461,22 @@ class App extends Presentation {
         $activeSheet->mergeCells("A3:A$n");
         $activeSheet->mergeCells("U3:U$n");
 
+        /*//Set Width
+        for($col = 'A'; $col !== 'U'; $col++) {
+            $activeSheet->getColumnDimension($col)
+                ->setRowHeight(40);
+        }*/
+
+        //
+        //Set Width and height
+        //set height
+          $bb = count($exportData) + 2;
+           for($col =3 ; $col <=$bb; $col++) {
+               $activeSheet->getRowDimension("$col")->setRowHeight(20.75);
+           }
+
+
+
         // Default Styles
         $defaultStyle = array(
             'alignment' => array(
@@ -538,11 +555,16 @@ class App extends Presentation {
         //Set last cell border of title
         $activeSheet->getStyle("O2:S2")->applyFromArray($setLastTitleBorder);
 
+
+        //PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
         //Set cell width
         $activeSheet->getColumnDimension('P')->setWidth(2.5);
         $activeSheet->getColumnDimension('R')->setWidth(2.5);
+        $activeSheet->getColumnDimension('C')->setWidth(38.14);
+        $activeSheet->getColumnDimension('F')->setWidth(25.71);
+        $activeSheet->getColumnDimension('I')->setWidth(13.71);
 
-
+        //
 
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         $writerName = 'Excel2007';
