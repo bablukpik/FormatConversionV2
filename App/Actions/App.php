@@ -100,11 +100,20 @@ class App extends Presentation {
 
                 if ($data['clientData'] && $data['serverData']) {
 
+                    //New line character replaced of Server data
                     $titles = array_shift($data['serverData']);
                     foreach ($titles as $key => $title) {
                         $titles[$key] = preg_replace("/\s/", '', $title);
                     }
                     array_unshift($data['serverData'], $titles);
+
+                    //New line character replaced of Client data
+                    $clientTitles = array_shift($data['clientData']);
+                    foreach ($clientTitles as $clientKey => $clientTitle) {
+                        $clientTitles[$clientKey] = preg_replace("/\s/", '', $clientTitle);
+                    }
+                    array_unshift($data['clientData'], $clientTitles);
+
 
                     // Set data
                     $_SESSION['serverData'] = $data['serverData'];
@@ -264,12 +273,12 @@ class App extends Presentation {
         $sessionKeyName = $reportType == 'maker' ? 'clientMakerMapData' : 'clientSellerMapData';
 
         $data['clientMapData'] = Convert::MapData(isset($_SESSION['clientData'])?$_SESSION['clientData']:'', $this->data);
+
         // Set session
         if ($data['clientMapData']) {
             $_SESSION[$sessionKeyName] = $data['clientMapData'];
         }
-
-
+        
         $clientDataArr = $_SESSION[$sessionKeyName];
       //Table edited data for Buyer and Seller
         if (isset($_POST['janCode'])){
@@ -298,6 +307,8 @@ class App extends Presentation {
         //$data['insertedData'] = Convert::InsertLinkData($data['clientMapData']);
 
         $data['clientMapData'] = $_SESSION[$sessionKeyName];
+
+        //var_dump($_SESSION);
         return $this->render('compared-data-page', $data);
     }
 

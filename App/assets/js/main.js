@@ -365,7 +365,6 @@ $(document).on('ready',function () {
     }
 });
 
-
 /**
  * Export to Excel Final compared data
  */
