@@ -568,11 +568,17 @@ class App extends Presentation {
 
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         $writerName = 'Excel2007';
-        $fullName = "エクセル出力.xlsx";
+
+        $fullName = "エクセル出力";
+
+        $fileNameeee = utf8_encode($fullName);
+        $fileNameeee = $fullName.".xlsx";
+
 
         // Redirect output to a clientâ€™s web browser (Excel5)
         header('Content-Type: '.$contentType);
-        header('Content-Disposition: attachment;filename="'.$fullName.'"');
+        //header('Content-Disposition: attachment;filename="'.$fullName.'"');
+        header('Content-Disposition: attachment;filename="'.$fileNameeee.'"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
