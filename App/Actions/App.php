@@ -445,6 +445,7 @@ class App extends Presentation {
 
         //Set Fonts
         $objPHPExcel->getDefaultStyle()->getFont()->setName('ＭＳ Ｐゴシック');
+        PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
 
         /*$objPHPExcel->getActiveSheet()->getStyle('A1:U4')
             ->getAlignment()->setWrapText(true);*/
@@ -603,9 +604,6 @@ class App extends Presentation {
         //Set last cell border of title
         $activeSheet->getStyle("O2:S2")->applyFromArray($setLastTitleBorder);
 
-
-        //PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
-
         //Set cell width
         $activeSheet->getColumnDimension('P')->setWidth(2.5);
         $activeSheet->getColumnDimension('R')->setWidth(2.5);
@@ -654,8 +652,8 @@ class App extends Presentation {
         $writerName = 'Excel2007';
 
         $fileNameDate = date('Y-m-d-H-i-s');
-        $fullName = "Report_$fileNameDate.xlsx";
 
+        $fullName = "Report_$fileNameDate.xlsx";
 
         // Redirect output to a clientâ€™s web browser (Excel5)
         header('Content-Type: '.$contentType);
