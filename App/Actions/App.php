@@ -396,16 +396,17 @@ class App extends Presentation {
                     $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
                 }
 
-
+                //x Sign print
                 if ($i == 13) {
                     $rowData['x1'] = 'x';
                 } else if ($i == 14) {
                     $rowData['x2'] = 'x';
                 }
                 $i++;
-            }
+            }//Cols
+
             $exportData[] = $rowData;
-        }
+        }//Rows
 
         $nn = count($exportData);
         for ($i=2; $i<$nn; $i++){
@@ -498,8 +499,7 @@ class App extends Presentation {
         $defaultStyle = array(
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,
-                'wrap' => true
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT
             )
         );
         //Default style
@@ -566,7 +566,7 @@ class App extends Presentation {
         }
 
 
-        //No background color
+        //background color O-S
         $Nobackgroundcolor = array(
             'fill' => array(
                 'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -574,12 +574,11 @@ class App extends Presentation {
             ),
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                'wrap' => true
-            ),
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            )
         );
 
-        //No background color O-S
+        //background color O-S
         $activeSheet->getStyle("O3:S$n")->applyFromArray($Nobackgroundcolor);
 
         //Set last cell border
@@ -606,14 +605,49 @@ class App extends Presentation {
 
 
         //PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
+
         //Set cell width
         $activeSheet->getColumnDimension('P')->setWidth(2.5);
         $activeSheet->getColumnDimension('R')->setWidth(2.5);
-        //$activeSheet->getColumnDimension('C')->setWidth(38.14);
+        $activeSheet->getColumnDimension('C')->setWidth(38.14);
         $activeSheet->getColumnDimension('F')->setWidth(13.25);
         $activeSheet->getColumnDimension('A')->setWidth(20);
         $activeSheet->getColumnDimension('U')->setWidth(20);
 
+        //Alignment
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("C3:C$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("A3:A$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("B3:B$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("U3:U$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("T3:T$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $alignmentAtoI = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'wrap' => false
+            )
+        );
+        $activeSheet->getStyle("D3:I$n")->applyFromArray($alignmentAtoI);
 
 
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
@@ -625,7 +659,6 @@ class App extends Presentation {
 
         // Redirect output to a clientâ€™s web browser (Excel5)
         header('Content-Type: '.$contentType);
-        //header('Content-Disposition: attachment;filename="'.$fullName.'"');
         header('Content-Disposition: attachment;filename="'.$fullName.'"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
