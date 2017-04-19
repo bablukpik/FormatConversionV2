@@ -619,10 +619,10 @@ class App extends Presentation {
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         $writerName = 'Excel2007';
 
-        $fullName = "エクセル出力-";
+        $fullName = "エクセル出力";
 
         $fileNameeee = utf8_encode($fullName);
-        $fileNameeee = $fullName.".xlsx";
+        $fileNameeee = $fullName."-.xlsx";
 
 
         // Redirect output to a clientâ€™s web browser (Excel5)
