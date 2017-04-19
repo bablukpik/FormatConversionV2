@@ -430,7 +430,11 @@ class App extends Presentation {
         //$headers = array_keys(reset($exportData));
         //array_unshift($exportData, $headers);
 
+        //Set Fonts
+        $objPHPExcel->getDefaultStyle()->getFont()->setName('ＭＳ Ｐゴシック');
+
         $activeSheet->fromArray($exportData, NULL, 'A1');
+
 
         //Merge cells
         $activeSheet->mergeCells('A1:A2');
@@ -569,7 +573,7 @@ class App extends Presentation {
         $contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         $writerName = 'Excel2007';
 
-        $fullName = "エクセル出力";
+        $fullName = "エクセル出力-";
 
         $fileNameeee = utf8_encode($fullName);
         $fileNameeee = $fullName.".xlsx";

@@ -13,6 +13,17 @@
     .cell{
 
     }
+    /*Freeze Row*/
+/*    tbody{
+        overflow-y: auto;
+        height: 350px;
+        width: 102%;
+    }
+    thead,tbody{
+        display: block;
+    }*/
+
+    /*/Freeze Row*/
 </style>
 
 <div class="container-fluid">
@@ -36,7 +47,7 @@
             <div class="data-wrapper w-100 ml-0 outsideborder">
                 <table class="row-content">
                     <thead>
-                    <tr class="bg-header">
+                    <tr id="table-with-sticky-rows" class="bg-header">
                         <?php foreach ($titles as $title) : ?>
 
                             <th class="<?php echo $title == '賞味期限'?'border_separator':''?><?php echo $title == '包装形態'?'border_separator2':''?>"><?php echo $title; ?></th>
@@ -115,4 +126,5 @@
             editUpdate(cell);
         }, 1000);
     });
+
 </script>
