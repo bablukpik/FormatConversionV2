@@ -8,6 +8,7 @@
     </div>
     <div class="cl"></div>
     <div class="selection_maker_item_next ">
-        <button id="seller_selection_next" class="button2" style="text-align:center;">「次へ」を押してください。</button>
+        <button id="seller_selection_next" class="button2" style="text-align:center;">次へ</button>
     </div>
+    <p style="margin-left: 160px; margin-bottom: 10px;">を押してください。</p>
 </div>
