@@ -363,7 +363,7 @@ class App extends Presentation {
         $cSheetTitles = array();
         //$donkiTitle = array('新・リ', '品名', '量目', '入数	', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味 期間', '保存 温度', '卸', '本体価格案', '値入％', '希望小売価格', '税込価格', '縦', '横', '奥行', '発売予定', '発売の狙い・コンセプト');
 
-        $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '商品サイズ（ｍｍ）','','','','', '発売予定', '発売の狙い・コンセプト');
+        $cSheetTitlesRow1 = array('ブランド/セグメント', '新・リ', '品名', '量目', '入数', 'ＪＡＮＣＤ ＜4901231＞', '包装形態', '賞味期間', '保存温度', '税別', '','','', '税込価格', '商品サイズ（ｍｍ）','','','','', '発売予定', '発売の狙い・コンセプト');
 
         $cSheetTitlesRow2 = array('', '', '', '', '', '', '', '', '','卸', '本体価格案', '値入％	', '希望小売価格','', '縦','','横','','奥行', '','');
 
@@ -387,7 +387,16 @@ class App extends Presentation {
             $i = 0;
 
             foreach ($donkiTitle as $title) {
-                $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+
+                //Jan Code 7 digits showing
+                if ($title=='JAN'){
+                    //echo $row[$title];
+                    $rowData[$title] = substr($row[$title], 7);
+                }else{
+                    $rowData[$title] = isset($row[$title]) ? $row[$title] : '';
+                }
+
+
                 if ($i == 13) {
                     $rowData['x1'] = 'x';
                 } else if ($i == 14) {
@@ -405,6 +414,7 @@ class App extends Presentation {
 
 
         //die(var_dump($exportData));
+
 
         // array_unshift($exportData, $cSheetTitlesRow1, $cSheetTitlesRow2);
         //array_unshift($exportData[2], '');
@@ -430,11 +440,13 @@ class App extends Presentation {
         //$headers = array_keys(reset($exportData));
         //array_unshift($exportData, $headers);
 
+        $activeSheet->fromArray($exportData, NULL, 'A1');
+
         //Set Fonts
         $objPHPExcel->getDefaultStyle()->getFont()->setName('ＭＳ Ｐゴシック');
 
-        $activeSheet->fromArray($exportData, NULL, 'A1');
-
+        /*$objPHPExcel->getActiveSheet()->getStyle('A1:U4')
+            ->getAlignment()->setWrapText(true);*/
 
         //Merge cells
         $activeSheet->mergeCells('A1:A2');
@@ -465,19 +477,20 @@ class App extends Presentation {
         $activeSheet->mergeCells("A3:A$n");
         $activeSheet->mergeCells("U3:U$n");
 
+
         /*//Set Width
         for($col = 'A'; $col !== 'U'; $col++) {
             $activeSheet->getColumnDimension($col)
                 ->setRowHeight(40);
         }*/
 
-        //
+
         //Set Width and height
         //set height
-          $bb = count($exportData) + 2;
+          /*$bb = count($exportData) + 2;
            for($col =3 ; $col <=$bb; $col++) {
                $activeSheet->getRowDimension("$col")->setRowHeight(20.75);
-           }
+           }*/
 
 
 
@@ -486,6 +499,7 @@ class App extends Presentation {
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,
+                'wrap' => true
             )
         );
         //Default style
@@ -496,6 +510,7 @@ class App extends Presentation {
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'wrap' => true
             ),
             'fill' => array(
                 'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -523,11 +538,11 @@ class App extends Presentation {
         $activeSheet->getStyle("A3:U$n")->applyFromArray($afterTitleStyle);
 
 //        for($i=3; $i<=$n; $i++){
-//            $activeSheet->getStyle("A$i:S$i")->applyFromArray($afterTitleStyle);
+//            $activeSheet->getStyle("A$i:U$i")->applyFromArray($afterTitleStyle);
 //        }
 
         //No specific cell border
-        $noBorder = array(
+       $noBorder = array(
             'borders' => array(
                 'allborders' => array(
                     'style' => PHPExcel_Style_Border::BORDER_NONE
@@ -536,6 +551,36 @@ class App extends Presentation {
         );
         //No specific cell border
         $activeSheet->getStyle("O2:S$n")->applyFromArray($noBorder);
+
+        //Horizontal cell border
+        $horizontalBorder = array(
+            'borders' => array(
+                'horizontal' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+        //Horizontal cell border
+        for($hori=3; $hori<=$n; $hori++){
+            $activeSheet->getStyle("O$hori:S$n")->applyFromArray($horizontalBorder);
+        }
+
+
+        //No background color
+        $Nobackgroundcolor = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => 'FFFFFF')
+            ),
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'wrap' => true
+            ),
+        );
+
+        //No background color O-S
+        $activeSheet->getStyle("O3:S$n")->applyFromArray($Nobackgroundcolor);
 
         //Set last cell border
         $setLastBorder = array(
@@ -564,9 +609,10 @@ class App extends Presentation {
         //Set cell width
         $activeSheet->getColumnDimension('P')->setWidth(2.5);
         $activeSheet->getColumnDimension('R')->setWidth(2.5);
-        $activeSheet->getColumnDimension('C')->setWidth(38.14);
-        $activeSheet->getColumnDimension('F')->setWidth(25.71);
-        $activeSheet->getColumnDimension('I')->setWidth(13.71);
+        //$activeSheet->getColumnDimension('C')->setWidth(38.14);
+        $activeSheet->getColumnDimension('F')->setWidth(13.25);
+        $activeSheet->getColumnDimension('A')->setWidth(20);
+        $activeSheet->getColumnDimension('U')->setWidth(20);
 
         //
 
