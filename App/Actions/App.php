@@ -638,6 +638,11 @@ class App extends Presentation {
             ->getAlignment()
             ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
+        $objPHPExcel->getActiveSheet()
+            ->getStyle("N3:N$n")
+            ->getAlignment()
+            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
         $alignmentAtoI = array(
             'alignment' => array(
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
