@@ -357,7 +357,7 @@ class App extends Presentation {
 
 
     /**
-     * Export final compared data
+     * Export final compared data BBB
      */
     public function exportFinalComparedData(){
         $cSheetTitles = array();
@@ -620,7 +620,7 @@ class App extends Presentation {
         $writerName = 'Excel2007';
 
         $fileNameDate = date('Y-m-d-H-i-s');
-        $fullName = "エクセル出力_$fileNameDate.xlsx";
+        $fullName = "Report_$fileNameDate.xlsx";
 
 
         // Redirect output to a clientâ€™s web browser (Excel5)
